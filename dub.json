@@ -3,6 +3,7 @@
 	"description": "A side-scrolling war game.",
     "authors": [ "Connor S. Parks" ],
     "version": "0.0.1",
+    "sourcePath" : "src",
     "targetType": "executable",
     "targetPath" : "bin",
     "dependencies": {
