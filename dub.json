@@ -1,0 +1,16 @@
+{
+	"name": "fiiight",
+	"description": "A side-scrolling war game.",
+    "authors": [ "Connor S. Parks" ],
+    "version": "0.0.1",
+    "targetType": "executable",
+    "targetPath" : "bin",
+    "dependencies": {
+        "derelict-glfw3": "~>2.0.0",
+        "derelict-gl3": "~>1.0.18",
+        "entitysysd": "~>2.4.1",
+        "dbox": "~>0.0.7-alpha"
+    },
+	"copyright": "Copyright © 2016, Connor S. Parks",
+	"license": "Custom"
+}
