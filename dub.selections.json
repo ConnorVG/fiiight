@@ -1,7 +1,6 @@
 {
 	"fileVersion": 1,
 	"versions": {
-		"dbox": "0.0.7-alpha",
 		"derelict-gl3": "1.0.18",
 		"derelict-glfw3": "2.0.0",
 		"derelict-sdl2": "1.9.7",

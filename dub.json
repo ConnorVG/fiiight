@@ -8,9 +8,11 @@
     "dependencies": {
         "derelict-glfw3": "~>2.0.0",
         "derelict-gl3": "~>1.0.18",
-        "entitysysd": "~>2.4.1",
-        "dbox": "~>0.0.7-alpha"
+        "entitysysd": "~>2.4.1"
     },
+    "subPackages": [
+        "./lib/box2d/",
+    ],
 	"copyright": "Copyright © 2016, Connor S. Parks",
 	"license": "Custom"
 }
