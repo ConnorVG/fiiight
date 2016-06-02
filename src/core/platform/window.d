@@ -12,14 +12,21 @@ debug import derelict.glfw3.glfw3 : glfwSetErrorCallback, glfwWindowHint, GLFW_O
 
 import std.string : toStringz;
 
-debug import std.stdio : writeln, stdout;
-
 debug {
+    import std.stdio : stderr;
+
     extern(C) {
+        /**
+         * Handles GLFW error messages.
+         *
+         * Params:
+         *      error        =      the error code
+         *      description  =      the error descriptionI
+         */
         void glfwErrorCallback(int error, const(char)* description) nothrow
         {
             try {
-                stdout.writef("GLFW Error[%d]: %s", error, description);
+                stderr.writef("GLFW Error[%d]: %s", error, description);
             } catch (Exception e) { }
         }
     }
