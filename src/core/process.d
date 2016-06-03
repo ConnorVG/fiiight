@@ -2,6 +2,7 @@ module fiiight.core.process;
 
 import fiiight.core.platform.settings : Settings;
 import fiiight.core.scene : Scene;
+import fiiight.utils.input : InputFactory, InputHandler;
 
 struct Process
 {
@@ -9,6 +10,11 @@ struct Process
      * The settings.
      */
     private Settings* settings;
+
+    /**
+     * The input factory.
+     */
+    private InputFactory* inputFactory;
 
     /**
      * The current scene.
@@ -26,9 +32,13 @@ struct Process
      * Params:
      *     settings  =     the settings
      */
-    public void load(Settings* settings)
+    public void load(Settings* settings, InputFactory* inputFactory)
     {
         this.settings = settings;
+        this.inputFactory = inputFactory;
+
+        // some test shizzle
+        this.inputFactory.register(InputHandler.create());
     }
 
     /**
@@ -64,10 +74,16 @@ struct Process
      * Params:
      *      scene  =        the scene to use
      */
-    public void setScene(Scene* scene)
+    public void setScene(Scene* scene = null)
     {
         if (this.scene is null) {
             this.scene.unload();
+        }
+
+        if (scene is null) {
+            this.scene = null;
+
+            return;
         }
 
         scene.load(this.settings);

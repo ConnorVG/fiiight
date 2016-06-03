@@ -1,13 +1,15 @@
 module fiiight.core.game;
 
 import fiiight.core.platform.settings : Settings;
-import fiiight.core.platform.window : Window;
+import fiiight.core.platform.window : Window, WindowData;
 import fiiight.core.process : Process;
+import fiiight.utils.input : InputFactory;
 
 import derelict.opengl3.gl3 : glClear, GL_COLOR_BUFFER_BIT, GL_DEPTH_BUFFER_BIT;
 import derelict.glfw3.glfw3 :
     GLFWwindow, glfwSetWindowUserPointer, glfwGetWindowUserPointer,
-    glfwSetWindowCloseCallback, glfwPollEvents, glfwSwapBuffers;
+    glfwSetWindowCloseCallback, glfwSetKeyCallback, glfwSetCharCallback,
+    glfwPollEvents, glfwSwapBuffers;
 
 import std.conv : to;
 
@@ -24,10 +26,48 @@ extern (C) {
      */
     void onClose(GLFWwindow* window) nothrow
     {
-        Game* game = cast(Game*) glfwGetWindowUserPointer(window);
+        WindowData* data = cast(WindowData*) glfwGetWindowUserPointer(window);
+        Game* game = data.game;
 
         try {
             game.stop();
+        } catch (Exception e) { }
+    }
+
+    /**
+     * Handle the GLFWwindow key input event.
+     *
+     * Params:
+     *     window    =      the window
+     *     key       =      the key
+     *     scanCode  =      the scanCode
+     *     action    =      the action
+     *     mods      =      the mods
+     */
+    void onKeyInputEvent(GLFWwindow* window, int key, int scanCode, int action, int mods) nothrow
+    {
+        WindowData* data = cast(WindowData*) glfwGetWindowUserPointer(window);
+        InputFactory* inputFactory = data.inputFactory;
+
+        try {
+            inputFactory.handleKey(key, scanCode, action, mods);
+        } catch (Exception e) { }
+    }
+
+    /**
+     * Handle the GLFWwindow char input event.
+     *
+     * Params:
+     *     window    =      the window
+     *     charCode  =      the UTF-32 char code
+     */
+    void onCharInputEvent(GLFWwindow* window, uint charCode) nothrow
+    {
+        WindowData* data = cast(WindowData*) glfwGetWindowUserPointer(window);
+        InputFactory* inputFactory = data.inputFactory;
+
+        try {
+            inputFactory.handleChar(charCode);
         } catch (Exception e) { }
     }
 }
@@ -43,6 +83,11 @@ struct Game
      * The window.
      */
     private Window* window;
+
+    /**
+     * The input factory.
+     */
+    private InputFactory* inputFactory;
 
     /**
      * The process.
@@ -72,13 +117,19 @@ struct Game
         this.window = cast(Window*) GC.malloc(Window.sizeof);
         this.window.setup("fiiight", 1080, 810).open();
 
+        this.inputFactory = cast(InputFactory*) GC.calloc(InputFactory.sizeof);
+
         GLFWwindow* window = this.window.getGlfwWindow();
 
-        glfwSetWindowUserPointer(window, &this);
+        glfwSetWindowUserPointer(window, WindowData.create(&this, this.inputFactory));
+
         glfwSetWindowCloseCallback(window, &onClose);
 
-        this.process = cast(Process*) GC.malloc(Process.sizeof);
-        this.process.load(settings);
+        glfwSetKeyCallback(window, &onKeyInputEvent);
+        glfwSetCharCallback(window, &onCharInputEvent);
+
+        this.process = cast(Process*) GC.calloc(Process.sizeof);
+        this.process.load(this.settings, this.inputFactory);
     }
 
     /**
@@ -86,6 +137,8 @@ struct Game
      */
     public void unload()
     {
+        this.process.unload();
+
         if (! this.window.isOpen()) {
             return;
         }
@@ -127,10 +180,11 @@ struct Game
                 Thread.sleep(dur!"msecs"(delay * -1));
             }
 
+            glfwPollEvents();
+
             this.process.run(tick);
 
             glfwSwapBuffers(window);
-            glfwPollEvents();
 
             before = now;
         }

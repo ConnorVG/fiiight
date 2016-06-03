@@ -1,5 +1,8 @@
 module fiiight.core.platform.window;
 
+import fiiight.core.game : Game;
+import fiiight.utils.input : InputFactory;
+
 import derelict.opengl3.gl3 :
     DerelictGL3, GLuint, glClearColor, glClear,
     glGenVertexArrays, glBindVertexArray,
@@ -14,6 +17,8 @@ import derelict.glfw3.glfw3 :
 debug import derelict.glfw3.glfw3 : glfwSetErrorCallback, glfwWindowHint, GLFW_OPENGL_DEBUG_CONTEXT;
 
 import std.string : toStringz;
+
+import core.memory : GC;
 
 debug {
     import std.stdio : stderr;
@@ -32,6 +37,38 @@ debug {
                 stderr.writef("GLFW Error[%d]: %s", error, description);
             } catch (Exception e) { }
         }
+    }
+}
+
+struct WindowData
+{
+    /**
+     * The game instance.
+     */
+    public Game* game;
+
+    /**
+     * The input factory instance.
+     */
+    public InputFactory* inputFactory;
+
+    /**
+     * Creates for a specific game and input.
+     *
+     * Params:
+     *      game          =     the game instance
+     *      inputFactory  =     the input factory instance
+     *
+     * Returns: this
+     */
+    public static create(Game* game, InputFactory* inputFactory)
+    {
+        WindowData* data = cast(WindowData*) GC.malloc(WindowData.sizeof);
+
+        data.game = game;
+        data.inputFactory = inputFactory;
+
+        return data;
     }
 }
 
