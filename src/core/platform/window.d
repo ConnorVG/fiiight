@@ -1,12 +1,15 @@
 module fiiight.core.platform.window;
 
 import derelict.opengl3.gl3 :
-    DerelictGL3, glClearColor, glClear,
-    GL_COLOR_BUFFER_BIT, GL_DEPTH_BUFFER_BIT;
+    DerelictGL3, GLuint, glClearColor, glClear,
+    glGenVertexArrays, glBindVertexArray,
+    GL_COLOR_BUFFER_BIT, GL_DEPTH_BUFFER_BIT, GL_TRUE;
 import derelict.glfw3.glfw3 :
     GLFWwindow, DerelictGLFW3, glfwSwapBuffers,
     glfwInit, glfwCreateWindow, glfwGetFramebufferSize, glfwSwapInterval,
-    glfwMakeContextCurrent, glfwDestroyWindow, glfwTerminate;
+    glfwMakeContextCurrent, glfwDestroyWindow, glfwTerminate,
+    GLFW_SAMPLES, GLFW_CONTEXT_VERSION_MAJOR, GLFW_CONTEXT_VERSION_MINOR,
+    GLFW_OPENGL_FORWARD_COMPAT, GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE;
 
 debug import derelict.glfw3.glfw3 : glfwSetErrorCallback, glfwWindowHint, GLFW_OPENGL_DEBUG_CONTEXT;
 
@@ -92,6 +95,14 @@ struct Window
 
         glfwInit();
 
+        debug glfwWindowHint(GLFW_OPENGL_DEBUG_CONTEXT, 1);
+
+        glfwWindowHint(GLFW_SAMPLES, 4);
+        glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 4);
+        glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 5);
+        glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);
+        glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
+
         this._glfwWindow = glfwCreateWindow(
             this._width,
             this._height,
@@ -102,13 +113,13 @@ struct Window
 
         glfwGetFramebufferSize(this._glfwWindow, &this._width, &this._height);
         glfwMakeContextCurrent(this._glfwWindow);
-        glfwSwapInterval(1);
-
-        debug glfwWindowHint(GLFW_OPENGL_DEBUG_CONTEXT, 1);
 
         DerelictGL3.reload();
 
-        glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
+        glfwSwapInterval(0);
+
+        // Beautiful "Cornflower Blue"
+        glClearColor(0.39f, 0.58f, 0.92f, 1.0f);
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
         glfwSwapBuffers(this._glfwWindow);

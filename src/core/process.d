@@ -2,8 +2,6 @@ module fiiight.core.process;
 
 import fiiight.core.platform.settings : Settings;
 
-import derelict.opengl3.gl3 : GL_TRUE;
-
 struct Process
 {
     /**
@@ -24,9 +22,7 @@ struct Process
      */
     public void load(Settings* settings)
     {
-        this._settings = settings;
-
-        // Nothing yet.
+        //
     }
 
     /**

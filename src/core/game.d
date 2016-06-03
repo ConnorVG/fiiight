@@ -4,10 +4,12 @@ import fiiight.core.platform.settings : Settings;
 import fiiight.core.platform.window : Window;
 import fiiight.core.process : Process;
 
-import derelict.opengl3.gl3 :glClear, GL_COLOR_BUFFER_BIT, GL_DEPTH_BUFFER_BIT;
+import derelict.opengl3.gl3 : glClear, GL_COLOR_BUFFER_BIT, GL_DEPTH_BUFFER_BIT;
 import derelict.glfw3.glfw3 :
     GLFWwindow, glfwSetWindowUserPointer, glfwGetWindowUserPointer,
     glfwSetWindowCloseCallback, glfwPollEvents, glfwSwapBuffers;
+
+import std.conv : to;
 
 import core.memory : GC;
 import core.time : MonoTime, Duration, dur;
@@ -104,13 +106,13 @@ struct Game
     /**
      * Runs the main loop.
      */
-    void run()
+    public void run()
     {
         GLFWwindow* window = this._window.getGlfwWindow();
         ulong rate = 1000L / this._settings.updateRate;
         MonoTime before = MonoTime.currTime;
+
         while (this._running) {
-            glfwPollEvents();
             glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
             MonoTime now = MonoTime.currTime;
@@ -128,6 +130,7 @@ struct Game
             this._process.run(tick);
 
             glfwSwapBuffers(window);
+            glfwPollEvents();
 
             before = now;
         }
