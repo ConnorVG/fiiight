@@ -40,22 +40,22 @@ struct Window
     /**
      * The title.
      */
-    private string _title;
+    private string title;
 
     /**
      * The width.
      */
-    private int _width;
+    private int width;
 
     /**
      * The height.
      */
-    private int _height;
+    private int height;
 
     /**
      * The GLFWwindow instance.
      */
-    private GLFWwindow* _glfwWindow;
+    private GLFWwindow* glfwWindow;
 
     /**
      * We don't want the default construction to be possible.
@@ -74,9 +74,9 @@ struct Window
      */
     public Window* setup(const string title = "fiiight", const int width = 800, const int height = 600)
     {
-        this._title = title;
-        this._width = width;
-        this._height = height;
+        this.title = title;
+        this.width = width;
+        this.height = height;
 
         return &this;
     }
@@ -103,16 +103,16 @@ struct Window
         glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);
         glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 
-        this._glfwWindow = glfwCreateWindow(
-            this._width,
-            this._height,
-            this._title.toStringz(),
+        this.glfwWindow = glfwCreateWindow(
+            this.width,
+            this.height,
+            this.title.toStringz(),
             null /** Fullscreen: glfwGetPrimaryMonitor() */,
             null
         );
 
-        glfwGetFramebufferSize(this._glfwWindow, &this._width, &this._height);
-        glfwMakeContextCurrent(this._glfwWindow);
+        glfwGetFramebufferSize(this.glfwWindow, &this.width, &this.height);
+        glfwMakeContextCurrent(this.glfwWindow);
 
         DerelictGL3.reload();
 
@@ -122,7 +122,7 @@ struct Window
         glClearColor(0.39f, 0.58f, 0.92f, 1.0f);
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-        glfwSwapBuffers(this._glfwWindow);
+        glfwSwapBuffers(this.glfwWindow);
 
         return &this;
     }
@@ -138,7 +138,7 @@ struct Window
             return &this;
         }
 
-        glfwDestroyWindow(this._glfwWindow);
+        glfwDestroyWindow(this.glfwWindow);
         glfwTerminate();
 
         return &this;
@@ -151,7 +151,7 @@ struct Window
      */
     public string getTitle()
     {
-        return this._title;
+        return this.title;
     }
 
     /**
@@ -161,7 +161,7 @@ struct Window
      */
     public int getWidth()
     {
-        return this._width;
+        return this.width;
     }
 
     /**
@@ -171,7 +171,7 @@ struct Window
      */
     public int getHeight()
     {
-        return this._height;
+        return this.height;
     }
 
     /**
@@ -181,7 +181,7 @@ struct Window
      */
     public GLFWwindow* getGlfwWindow()
     {
-        return this._glfwWindow;
+        return this.glfwWindow;
     }
 
     /**
@@ -191,6 +191,6 @@ struct Window
      */
     public bool isOpen()
     {
-        return this._glfwWindow != null;
+        return this.glfwWindow != null;
     }
 }

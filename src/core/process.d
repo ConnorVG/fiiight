@@ -7,7 +7,7 @@ struct Process
     /**
      * The settings.
      */
-    private Settings* _settings;
+    private Settings* settings;
 
     /**
      * We don't want the default construction to be possible.
@@ -22,7 +22,7 @@ struct Process
      */
     public void load(Settings* settings)
     {
-        //
+        this.settings = settings;
     }
 
     /**

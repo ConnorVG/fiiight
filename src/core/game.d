@@ -37,22 +37,22 @@ struct Game
     /**
      * The settings.
      */
-    private Settings* _settings;
+    private Settings* settings;
 
     /**
      * The window.
      */
-    private Window* _window;
+    private Window* window;
 
     /**
      * The process.
      */
-    private Process* _process;
+    private Process* process;
 
     /**
      * Whether the process is running or not.
      */
-    private bool _running = false;
+    private bool running = false;
 
     /**
      * We don't want the default construction to be possible.
@@ -67,18 +67,18 @@ struct Game
      */
     public void load(Settings* settings)
     {
-        this._settings = settings;
+        this.settings = settings;
 
-        this._window = cast(Window*) GC.malloc(Window.sizeof);
-        this._window.setup("fiiight", 1080, 810).open();
+        this.window = cast(Window*) GC.malloc(Window.sizeof);
+        this.window.setup("fiiight", 1080, 810).open();
 
-        GLFWwindow* window = this._window.getGlfwWindow();
+        GLFWwindow* window = this.window.getGlfwWindow();
 
         glfwSetWindowUserPointer(window, &this);
         glfwSetWindowCloseCallback(window, &onClose);
 
-        this._process = cast(Process*) GC.malloc(Process.sizeof);
-        this._process.load(settings);
+        this.process = cast(Process*) GC.malloc(Process.sizeof);
+        this.process.load(settings);
     }
 
     /**
@@ -86,11 +86,11 @@ struct Game
      */
     public void unload()
     {
-        if (! this._window.isOpen()) {
+        if (! this.window.isOpen()) {
             return;
         }
 
-        this._window.close();
+        this.window.close();
     }
 
     /**
@@ -98,7 +98,7 @@ struct Game
      */
     public void start()
     {
-        this._running = true;
+        this.running = true;
 
         this.run();
     }
@@ -108,11 +108,11 @@ struct Game
      */
     public void run()
     {
-        GLFWwindow* window = this._window.getGlfwWindow();
-        ulong rate = 1000L / this._settings.updateRate;
+        GLFWwindow* window = this.window.getGlfwWindow();
+        ulong rate = 1000L / this.settings.updateRate;
         MonoTime before = MonoTime.currTime;
 
-        while (this._running) {
+        while (this.running) {
             glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
             MonoTime now = MonoTime.currTime;
@@ -127,7 +127,7 @@ struct Game
                 Thread.sleep(dur!"msecs"(delay * -1));
             }
 
-            this._process.run(tick);
+            this.process.run(tick);
 
             glfwSwapBuffers(window);
             glfwPollEvents();
@@ -141,6 +141,6 @@ struct Game
      */
     public void stop()
     {
-        this._running = false;
+        this.running = false;
     }
 }
