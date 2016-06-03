@@ -2,7 +2,9 @@ module fiiight.core.process;
 
 import fiiight.core.platform.settings : Settings;
 import fiiight.core.scene : Scene;
-import fiiight.utils.input : InputFactory, InputHandler;
+import fiiight.utils.input : InputFactory, InputHandler, InputType, KeyInputCommand;
+
+import derelict.glfw3.glfw3 : glfwSetWindowShouldClose, GLFW_KEY_ESCAPE;
 
 struct Process
 {
@@ -30,15 +32,13 @@ struct Process
      * Loads everything necessary.
      *
      * Params:
-     *     settings  =     the settings
+     *     settings      =      the settings
+     *     inputFactory  =      the input factory
      */
     public void load(Settings* settings, InputFactory* inputFactory)
     {
         this.settings = settings;
         this.inputFactory = inputFactory;
-
-        // some test shizzle
-        this.inputFactory.register(InputHandler.create());
     }
 
     /**
@@ -86,7 +86,7 @@ struct Process
             return;
         }
 
-        scene.load(this.settings);
+        scene.load(this.settings, this.inputFactory);
 
         this.scene = scene;
     }
