@@ -1,9 +1,10 @@
-module fiiight.core.scene;
+module fiiight.scenes.loading;
 
+import fiiight.core.scene : Scene;
 import fiiight.core.platform.settings : Settings;
 import fiiight.utils.input : InputFactory;
 
-interface Scene
+class LoadingScene : Scene
 {
     /**
      * Loads everything necessary.
@@ -12,12 +13,14 @@ interface Scene
      *     settings      =      the settings
      *     inputFactory  =      the input factory
      */
-    void load(Settings* settings, InputFactory* inputFactory);
+    void load(Settings* settings, InputFactory* inputFactory)
+    { /** */ }
 
     /**
      * Unloads everything no longer necessary.
      */
-    void unload();
+    void unload()
+    { /** */ }
 
     /**
      * Runs the scene.
@@ -25,5 +28,6 @@ interface Scene
      * Params:
      *      tick  =        the tick duration
      */
-    void run(const float tick);
+    void run(const float tick)
+    { /** */ }
 }

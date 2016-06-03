@@ -3,6 +3,7 @@ module fiiight.core.process;
 import fiiight.core.platform.settings : Settings;
 import fiiight.core.scene : Scene;
 import fiiight.utils.input : InputFactory, InputHandler, InputType, KeyInputCommand;
+import fiiight.scenes.menu : MenuScene, MenuSceneType;
 
 import derelict.glfw3.glfw3 : glfwSetWindowShouldClose, GLFW_KEY_ESCAPE;
 
@@ -21,7 +22,7 @@ struct Process
     /**
      * The current scene.
      */
-    private Scene* scene;
+    private Scene scene;
 
     /**
      * We don't want the default construction to be possible.
@@ -39,6 +40,8 @@ struct Process
     {
         this.settings = settings;
         this.inputFactory = inputFactory;
+
+        this.setScene(new MenuScene(MenuSceneType.MAIN_MENU));
     }
 
     /**
@@ -74,15 +77,14 @@ struct Process
      * Params:
      *      scene  =        the scene to use
      */
-    public void setScene(Scene* scene = null)
+    public void setScene(Scene scene = null)
     {
-        if (this.scene is null) {
+        if (this.scene !is null) {
             this.scene.unload();
+            this.scene = null;
         }
 
         if (scene is null) {
-            this.scene = null;
-
             return;
         }
 
