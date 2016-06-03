@@ -9,6 +9,11 @@ import derelict.opengl3.gl3 :
 struct Shader
 {
     /**
+     * We don't want the default construction to be possible.
+     */
+    @disable this();
+
+    /**
      * Creates a shader.
      *
      * Params:
@@ -44,6 +49,11 @@ struct Shader
 
 struct Program
 {
+    /**
+     * We don't want the default construction to be possible.
+     */
+    @disable this();
+
     /**
      * Creates a program.
      *
