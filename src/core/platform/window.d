@@ -8,19 +8,20 @@ import derelict.opengl3.gl3 :
     glGenVertexArrays, glBindVertexArray,
     GL_COLOR_BUFFER_BIT, GL_DEPTH_BUFFER_BIT, GL_TRUE, GL_FALSE;
 import derelict.glfw3.glfw3 :
-    GLFWwindow, DerelictGLFW3, glfwSwapBuffers,
+    GLFWwindow, DerelictGLFW3, glfwSwapBuffers, glfwWindowHint,
     glfwInit, glfwCreateWindow, glfwGetFramebufferSize, glfwSwapInterval,
     glfwMakeContextCurrent, glfwDestroyWindow, glfwTerminate,
     GLFW_SAMPLES, GLFW_CONTEXT_VERSION_MAJOR, GLFW_CONTEXT_VERSION_MINOR, GLFW_RESIZABLE,
     GLFW_OPENGL_FORWARD_COMPAT, GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE;
 
-debug import derelict.glfw3.glfw3 : glfwSetErrorCallback, glfwWindowHint, GLFW_OPENGL_DEBUG_CONTEXT;
+debug import derelict.glfw3.glfw3 : glfwSetErrorCallback, GLFW_OPENGL_DEBUG_CONTEXT;
 
 import std.string : toStringz;
 
 import core.memory : GC;
 
 debug {
+    import std.conv : to;
     import std.stdio : stderr;
 
     extern(C) {
@@ -34,7 +35,7 @@ debug {
         void glfwErrorCallback(int error, const(char)* description) nothrow
         {
             try {
-                stderr.writef("GLFW Error[%d]: %s", error, description);
+                stderr.writef("GLFW Error[%d]: %s", error, to!string(description));
             } catch (Exception e) { }
         }
     }
@@ -131,7 +132,14 @@ struct Window
     public Window* open()
     {
         DerelictGL3.load();
-        DerelictGLFW3.load();
+
+    version (Win64) {
+        DerelictGLFW3.load("./lib/glfw3-win64.dll");
+    } else version (Win32) {
+        DerelictGLFW3.load("./lib/glfw3-win32.dll");
+    } else {
+        DerelictGLFW3.load("./lib/glfw3-posix.so");
+    }
 
         debug glfwSetErrorCallback(&glfwErrorCallback);
 

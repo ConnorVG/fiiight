@@ -7,7 +7,7 @@
     "targetType": "executable",
     "targetPath" : "bin",
     "dependencies": {
-        "derelict-glfw3": "~>2.0.0",
+        "derelict-glfw3": "~>3.0.0",
         "derelict-gl3": "~>1.0.18",
         "entitysysd": "~>2.4.1"
     },
