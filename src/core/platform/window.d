@@ -139,7 +139,7 @@ struct Window
 
         debug glfwWindowHint(GLFW_OPENGL_DEBUG_CONTEXT, 1);
 
-        //glfwWindowHint(GLFW_SAMPLES, 4);
+        glfwWindowHint(GLFW_SAMPLES, 4);
         glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 4);
         glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 5);
         glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);
@@ -163,7 +163,7 @@ struct Window
 
         // Beautiful "Cornflower Blue"
         glClearColor(0.39f, 0.58f, 0.92f, 1.0f);
-        glClear(GL_COLOR_BUFFER_BIT);
+        glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
         glfwSwapBuffers(this.glfwWindow);
 

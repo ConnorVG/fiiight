@@ -30,10 +30,9 @@ class TestComponent : Component
      * The vertices.
      */
     protected float[] vertices = [
-        -0.45f,  0.45f,
-         0.45f,  0.45f,
-         0.45f, -0.45f,
-        -0.45f, -0.45f,
+       -1.0f, -1.0f,
+        1.0f, -1.0f,
+        0.0f,  1.0f,
     ];
 
     /**
@@ -44,14 +43,14 @@ class TestComponent : Component
         string vertexShader = "#version 450 core\n"
                               "layout(location = 0) in vec2 position;\n"
                               "void main() {\n"
-                                "gl_Position = vec4(position.x, position.y, 0.0, 1.0);\n"
+                                "gl_Position = vec4(position, 0.0, 1.0);\n"
                               "}";
 
         string fragmentShader = "#version 450 core\n"
                                 "precision highp float;\n"
-                                "layout(location = 0) out vec4 gl_FragColor;\n"
+                                "layout(location = 0) out vec4 colour;\n"
                                 "void main() {\n"
-                                  "gl_FragColor = vec4(1.0, 1.0, 1.0, 1.0);\n"
+                                  "colour = vec4(1.0, 1.0, 1.0, 1.0);\n"
                                 "}";
 
         this.program = Program.create(vertexShader, fragmentShader);
@@ -88,7 +87,7 @@ class TestComponent : Component
 
         glGenBuffers(1, &this.vbo);
         glBindBuffer(GL_ARRAY_BUFFER, this.vbo);
-        glBufferData(GL_ARRAY_BUFFER, this.vertices.sizeof, &this.vertices, GL_STATIC_DRAW);
+        glBufferData(GL_ARRAY_BUFFER, this.vertices.sizeof, this.vertices.ptr, GL_STATIC_DRAW);
 
         glGenVertexArrays(1, &this.vao);
         glBindVertexArray(this.vao);
@@ -97,10 +96,12 @@ class TestComponent : Component
         glEnableVertexAttribArray(this.position);
         glVertexAttribPointer(this.position, 2, GL_FLOAT, GL_FALSE, 0, null);
 
-        glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
+        glClearColor(0.39f, 0.58f, 0.92f, 1.0f);
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-        glDrawArrays(GL_POINTS, 0, 4);
+        glDrawArrays(GL_TRIANGLES, 0, 3);
+
+        glDisableVertexAttribArray(this.vao);
 
         glDeleteVertexArrays(1, &this.vao);
         glDeleteBuffers(1, &this.vbo);
