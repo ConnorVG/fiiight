@@ -138,7 +138,7 @@ struct Window
     } else version (Win32) {
         DerelictGLFW3.load("./lib/glfw3-win32.dll");
     } else {
-        DerelictGLFW3.load("./lib/glfw3-posix.so");
+        DerelictGLFW3.load("./lib/libglfw.so");
     }
 
         debug glfwSetErrorCallback(&glfwErrorCallback);
