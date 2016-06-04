@@ -2,8 +2,62 @@ module fiiight.utils.gl;
 
 import derelict.opengl3.gl3 :
     GLenum, glCreateShader, glShaderSource, glCompileShader, glGetShaderiv, glDeleteShader,
-    glCreateProgram, glAttachShader, glBindFragDataLocation, glLinkProgram, glGetProgramiv,
+    glUseProgram, glCreateProgram, glAttachShader, glBindFragDataLocation, glLinkProgram, glGetProgramiv,
     GL_TRUE, GL_FALSE, GL_COMPILE_STATUS, GL_LINK_STATUS, GL_VERTEX_SHADER, GL_FRAGMENT_SHADER;
+
+import core.memory : GC;
+
+struct Programs
+{
+    /**
+     * The registered programs.
+     */
+    private Program*[const string] programs;
+
+    private uint using;
+
+    /**
+     * We don't want the default construction to be possible.
+     */
+    @disable this();
+
+    /**
+     * Creates a collection of programs.
+     *
+     * Returns: the programs pointer
+     */
+    public static Programs* create()
+    {
+        return cast(Programs*) GC.calloc(Programs.sizeof);
+    }
+
+    /**
+     * Get a registered program.
+     */
+    public Program* get(const string name)
+    {
+        return this.programs[name];
+    }
+
+    /**
+     * Register a program.
+     */
+    public void set(const string name, Program* program)
+    {
+        this.programs[name] = program;
+    }
+
+    public void use(uint program)
+    {
+        if (this.using == program) {
+            return;
+        }
+
+        this.using = program;
+
+        glUseProgram(program);
+    }
+}
 
 struct Shader
 {
@@ -49,9 +103,33 @@ struct Shader
 struct Program
 {
     /**
+     * The program id.
+     */
+    public uint id;
+
+    /**
+     * The attributes.
+     */
+    public uint[const string] attributes;
+
+    /**
      * We don't want the default construction to be possible.
      */
     @disable this();
+
+    /**
+     * Creates a program.
+     *
+     * Returns: the program pointer
+     */
+    public static Program* create(uint id)
+    {
+        Program* program = cast(Program*) GC.calloc(Program.sizeof);
+
+        program.id = id;
+
+        return program;
+    }
 
     /**
      * Creates a program.

@@ -5,7 +5,7 @@ import fiiight.core.platform.window : Window, WindowData;
 import fiiight.core.process : Process;
 import fiiight.utils.input : InputFactory;
 
-import derelict.opengl3.gl3 : glClear, GL_COLOR_BUFFER_BIT, GL_DEPTH_BUFFER_BIT;
+import derelict.opengl3.gl3 : glClear, glGetError, GL_COLOR_BUFFER_BIT, GL_DEPTH_BUFFER_BIT, GL_NO_ERROR;
 import derelict.glfw3.glfw3 :
     GLFWwindow, glfwSetWindowUserPointer, glfwGetWindowUserPointer,
     glfwSetWindowCloseCallback, glfwSetKeyCallback, glfwSetCharCallback,
@@ -184,6 +184,7 @@ struct Game
             this.process.run(tick);
 
             glfwSwapBuffers(window);
+            assert(glGetError() == GL_NO_ERROR, "GL error!");
 
             before = now;
         }

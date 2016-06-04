@@ -2,6 +2,7 @@ module fiiight.scenes.menu;
 
 import fiiight.core.scene : Scene;
 import fiiight.core.platform.settings : Settings;
+import fiiight.utils.gl : Programs;
 import fiiight.utils.input : InputFactory, InputHandler;
 import fiiight.rendering.two_d.frame : Frame;
 import fiiight.rendering.two_d.components : TestComponent;
@@ -16,6 +17,11 @@ class MenuScene : Scene
      * The input handler.
      */
     protected InputHandler* inputHandler;
+
+    /**
+     * The programs.
+     */
+    protected Programs* programs;
 
     /**
      * The frame.
@@ -37,15 +43,20 @@ class MenuScene : Scene
      * Params:
      *     settings      =      the settings
      *     inputFactory  =      the input factory
+     *     programs      =      the programs
      */
-    public void load(Settings* settings, InputFactory* inputFactory)
+    public void load(Settings* settings, InputFactory* inputFactory, Programs* programs)
     {
         this.inputHandler = InputHandler.create();
         this.inputHandler.activate();
 
-        this.frame = Frame.create();
+        this.programs = programs;
 
-        this.frame.add(new TestComponent());
+        this.frame = Frame.create(this.programs);
+
+        for (uint i = 0; i < 512; i++) {
+            this.frame.add(new TestComponent());
+        }
     }
 
     /**

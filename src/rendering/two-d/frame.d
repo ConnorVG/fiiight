@@ -1,9 +1,10 @@
 module fiiight.rendering.two_d.frame;
 
 import fiiight.rendering.two_d.component : Component;
+import fiiight.utils.gl : Programs;
 
 import derelict.glfw3.glfw3 : GLFWwindow, glfwGetCurrentContext, glfwGetFramebufferSize;
-import derelict.opengl3.gl3 : glViewport;
+import derelict.opengl3.gl3 : glUseProgram, glViewport;
 
 import std.algorithm : remove;
 import std.parallelism : parallel;
@@ -12,6 +13,11 @@ import core.memory : GC;
 
 struct Frame
 {
+    /**
+     * The programs.
+     */
+    protected Programs* programs;
+
     /**
      * The components.
      */
@@ -45,11 +51,20 @@ struct Frame
     /**
      * Creates a frame.
      *
+     * Params:
+     *      programs  =     the programs
+     *      x         =     the x offset
+     *      y         =     the y offset
+     *      width     =     the width
+     *      height    =     the height
+     *
      * Returns: the frame pointer
      */
-    public static Frame* create(float x = 0.0f, float y = 0.0f, float width = 1.0f, float height = 1.0f)
+    public static Frame* create(Programs* programs, float x = 0.0f, float y = 0.0f, float width = 1.0f, float height = 1.0f)
     {
         Frame* frame = cast(Frame*) GC.calloc(Frame.sizeof);
+
+        frame.programs = programs;
 
         GLFWwindow* window = glfwGetCurrentContext();
         int windowWidth, windowHeight;
@@ -57,7 +72,7 @@ struct Frame
 
         frame.x = cast(int) (x * windowWidth);
         frame.width = cast(int) (width * windowWidth);
-        frame.y = cast(int) (y * windowHeight);
+        frame.y = windowHeight - cast(int) (height * windowHeight) - cast(int) (y * windowHeight);
         frame.height = cast(int) (height * windowHeight);
 
         return frame;
@@ -75,7 +90,7 @@ struct Frame
             component.update(tick);
         }
 
-        //glViewport(this.x, this.y, this.width, this.height);
+        glViewport(this.x, this.y, this.width, this.height);
         foreach (Component component; this.components) {
             component.render(tick);
         }
@@ -89,7 +104,7 @@ struct Frame
      */
     public void add(Component component)
     {
-        component.load();
+        component.load(this.programs);
 
         this.components ~= component;
     }

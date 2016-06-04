@@ -3,6 +3,7 @@ module fiiight.scenes.loading;
 import fiiight.core.scene : Scene;
 import fiiight.core.platform.settings : Settings;
 import fiiight.utils.input : InputFactory;
+import fiiight.utils.gl : Programs;
 
 class LoadingScene : Scene
 {
@@ -12,8 +13,9 @@ class LoadingScene : Scene
      * Params:
      *     settings      =      the settings
      *     inputFactory  =      the input factory
+     *     programs      =      the programs
      */
-    public void load(Settings* settings, InputFactory* inputFactory)
+    public void load(Settings* settings, InputFactory* inputFactory, Programs* programs)
     { /** */ }
 
     /**

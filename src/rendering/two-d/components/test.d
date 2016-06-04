@@ -1,16 +1,22 @@
 module fiiight.rendering.two_d.components.test;
 
 import fiiight.rendering.two_d.component : Component;
-import fiiight.utils.gl : Program;
+import fiiight.utils.gl : Programs, Program;
 
-import derelict.opengl3.gl3; // : glGenBuffers, glDeleteBuffers;
-
-import std.stdio : writeln;
+import derelict.opengl3.gl3 :
+    glGenVertexArrays, glBindVertexArray, glGenBuffers, glBindBuffer, glBufferData,
+    glEnableVertexAttribArray, glVertexAttribPointer, glDeleteBuffers, glDeleteVertexArrays,
+    glDrawArrays, GL_FLOAT, GL_FALSE, GL_TRIANGLES, GL_ARRAY_BUFFER, GL_STATIC_DRAW;
 
 class TestComponent : Component
 {
     /**
-     * The program reference.
+     * The programs.
+     */
+    protected Programs* programs;
+
+    /**
+     * The program.
      */
     protected uint program;
 
@@ -24,8 +30,6 @@ class TestComponent : Component
      */
     protected uint vao;
 
-    protected uint position;
-
     /**
      * The vertices.
      */
@@ -37,23 +41,26 @@ class TestComponent : Component
 
     /**
      * Loads everything necessary.
+     *
+     * Params:
+     *      programs  =     the programs
      */
-    public void load()
+    public void load(Programs* programs)
     {
-        string vertexShader = "#version 450 core\n"
-                              "layout(location = 0) in vec2 position;\n"
-                              "void main() {\n"
-                                "gl_Position = vec4(position, 0.0, 1.0);\n"
-                              "}";
+        auto program = programs.get("2d-basic");
 
-        string fragmentShader = "#version 450 core\n"
-                                "precision highp float;\n"
-                                "layout(location = 0) out vec4 colour;\n"
-                                "void main() {\n"
-                                  "colour = vec4(1.0, 1.0, 1.0, 1.0);\n"
-                                "}";
+        this.programs = programs;
+        this.program = program.id;
 
-        this.program = Program.create(vertexShader, fragmentShader);
+        glGenVertexArrays(1, &this.vao);
+        glBindVertexArray(this.vao);
+
+        glGenBuffers(1, &this.vbo);
+        glBindBuffer(GL_ARRAY_BUFFER, this.vbo);
+        glBufferData(GL_ARRAY_BUFFER, this.vertices.length * float.sizeof, this.vertices.ptr, GL_STATIC_DRAW);
+
+        glEnableVertexAttribArray(program.attributes["position"]);
+        glVertexAttribPointer(program.attributes["position"], 2, GL_FLOAT, GL_FALSE, 0, null);
     }
 
     /**
@@ -61,7 +68,8 @@ class TestComponent : Component
      */
     public void unload()
     {
-        // ...
+        glDeleteBuffers(1, &this.vbo);
+        glDeleteVertexArrays(1, &this.vao);
     }
 
     /**
@@ -71,9 +79,7 @@ class TestComponent : Component
      *      tick  =        the tick duration
      */
     public void update(const float tick)
-    {
-        // ...
-    }
+    { /** */ }
 
     /**
      * Render the component.
@@ -83,29 +89,14 @@ class TestComponent : Component
      */
     public void render(const float tick)
     {
-        glUseProgram(this.program);
+        // need to optimise a way of not always using
+        // this because it may already be in use
+        // and it's quite an expensive call.
+        //
+        // this is much faster than a straight glUseProgram though.
+        this.programs.use(this.program);
 
-        glGenBuffers(1, &this.vbo);
-        glBindBuffer(GL_ARRAY_BUFFER, this.vbo);
-        glBufferData(GL_ARRAY_BUFFER, this.vertices.sizeof, this.vertices.ptr, GL_STATIC_DRAW);
-
-        glGenVertexArrays(1, &this.vao);
         glBindVertexArray(this.vao);
-
-        this.position = glGetAttribLocation(this.program, "position");
-        glEnableVertexAttribArray(this.position);
-        glVertexAttribPointer(this.position, 2, GL_FLOAT, GL_FALSE, 0, null);
-
-        glClearColor(0.39f, 0.58f, 0.92f, 1.0f);
-        glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-
         glDrawArrays(GL_TRIANGLES, 0, 3);
-
-        glDisableVertexAttribArray(this.vao);
-
-        glDeleteVertexArrays(1, &this.vao);
-        glDeleteBuffers(1, &this.vbo);
-
-        assert(glGetError() == GL_NO_ERROR, "GL error!");
     }
 }

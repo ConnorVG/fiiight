@@ -1,11 +1,16 @@
 module fiiight.rendering.two_d.component;
 
+import fiiight.utils.gl : Programs;
+
 interface Component
 {
     /**
      * Loads everything necessary.
+     *
+     * Params:
+     *      programs  =     the programs
      */
-    void load();
+    void load(Programs* programs);
 
     /**
      * Unloads everything no longer necessary.
