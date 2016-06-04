@@ -3,7 +3,6 @@ module fiiight.utils.input.handling;
 import fiiight.utils.input.types : InputType;
 import fiiight.utils.input.commands : InputCommand, KeyInputCommand, CharInputCommand;
 
-import std.container : clear;
 import std.algorithm : remove;
 import std.parallelism : parallel;
 
@@ -32,7 +31,7 @@ struct InputHandler
     @disable this();
 
     /**
-     * Creates and input handler.
+     * Creates an input handler.
      *
      * Returns: the input handler pointer
      */

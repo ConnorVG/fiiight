@@ -166,8 +166,6 @@ struct Game
         MonoTime before = MonoTime.currTime;
 
         while (this.running) {
-            glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-
             MonoTime now = MonoTime.currTime;
             Duration elapsed = now - before;
 
@@ -181,6 +179,7 @@ struct Game
             }
 
             glfwPollEvents();
+            glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
             this.process.run(tick);
 

@@ -3,6 +3,8 @@ module fiiight.scenes.menu;
 import fiiight.core.scene : Scene;
 import fiiight.core.platform.settings : Settings;
 import fiiight.utils.input : InputFactory, InputHandler;
+import fiiight.rendering.two_d.frame : Frame;
+import fiiight.rendering.two_d.components : TestComponent;
 
 enum MenuSceneType {
     MAIN_MENU,
@@ -16,12 +18,17 @@ class MenuScene : Scene
     protected InputHandler* inputHandler;
 
     /**
+     * The frame.
+     */
+    protected Frame* frame;
+
+    /**
      * Constructs a specific type of menu scene.
      *
      * Params:
      *      type  =     the menu scene type
      */
-    this(MenuSceneType type)
+    public this(MenuSceneType type)
     { /** @todo */ }
 
     /**
@@ -31,17 +38,24 @@ class MenuScene : Scene
      *     settings      =      the settings
      *     inputFactory  =      the input factory
      */
-    void load(Settings* settings, InputFactory* inputFactory)
+    public void load(Settings* settings, InputFactory* inputFactory)
     {
         this.inputHandler = InputHandler.create();
         this.inputHandler.activate();
+
+        this.frame = Frame.create();
+
+        this.frame.add(new TestComponent());
     }
 
     /**
      * Unloads everything no longer necessary.
      */
-    void unload()
+    public void unload()
     {
+        this.frame.clear();
+        this.frame = null;
+
         this.inputHandler.deactivate();
         this.inputHandler.clear();
         this.inputHandler = null;
@@ -53,8 +67,8 @@ class MenuScene : Scene
      * Params:
      *      tick  =        the tick duration
      */
-    void run(const float tick)
+    public void run(const float tick)
     {
-        // ...
+        this.frame.run(tick);
     }
 }

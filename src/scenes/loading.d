@@ -13,13 +13,13 @@ class LoadingScene : Scene
      *     settings      =      the settings
      *     inputFactory  =      the input factory
      */
-    void load(Settings* settings, InputFactory* inputFactory)
+    public void load(Settings* settings, InputFactory* inputFactory)
     { /** */ }
 
     /**
      * Unloads everything no longer necessary.
      */
-    void unload()
+    public void unload()
     { /** */ }
 
     /**
@@ -28,6 +28,6 @@ class LoadingScene : Scene
      * Params:
      *      tick  =        the tick duration
      */
-    void run(const float tick)
+    public void run(const float tick)
     { /** */ }
 }

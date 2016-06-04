@@ -6,12 +6,12 @@ import fiiight.utils.input : InputFactory;
 import derelict.opengl3.gl3 :
     DerelictGL3, GLuint, glClearColor, glClear,
     glGenVertexArrays, glBindVertexArray,
-    GL_COLOR_BUFFER_BIT, GL_DEPTH_BUFFER_BIT, GL_TRUE;
+    GL_COLOR_BUFFER_BIT, GL_DEPTH_BUFFER_BIT, GL_TRUE, GL_FALSE;
 import derelict.glfw3.glfw3 :
     GLFWwindow, DerelictGLFW3, glfwSwapBuffers,
     glfwInit, glfwCreateWindow, glfwGetFramebufferSize, glfwSwapInterval,
     glfwMakeContextCurrent, glfwDestroyWindow, glfwTerminate,
-    GLFW_SAMPLES, GLFW_CONTEXT_VERSION_MAJOR, GLFW_CONTEXT_VERSION_MINOR,
+    GLFW_SAMPLES, GLFW_CONTEXT_VERSION_MAJOR, GLFW_CONTEXT_VERSION_MINOR, GLFW_RESIZABLE,
     GLFW_OPENGL_FORWARD_COMPAT, GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE;
 
 debug import derelict.glfw3.glfw3 : glfwSetErrorCallback, glfwWindowHint, GLFW_OPENGL_DEBUG_CONTEXT;
@@ -51,6 +51,11 @@ struct WindowData
      * The input factory instance.
      */
     public InputFactory* inputFactory;
+
+    /**
+     * We don't want the default construction to be possible.
+     */
+    @disable this();
 
     /**
      * Creates for a specific game and input.
@@ -134,11 +139,12 @@ struct Window
 
         debug glfwWindowHint(GLFW_OPENGL_DEBUG_CONTEXT, 1);
 
-        glfwWindowHint(GLFW_SAMPLES, 4);
+        //glfwWindowHint(GLFW_SAMPLES, 4);
         glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 4);
         glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 5);
         glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);
         glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
+        glfwWindowHint(GLFW_RESIZABLE, GL_FALSE);
 
         this.glfwWindow = glfwCreateWindow(
             this.width,
