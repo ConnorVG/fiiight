@@ -75,7 +75,7 @@ struct Frame
             component.update(tick);
         }
 
-        glViewport(this.x, this.y, this.width, this.height);
+        //glViewport(this.x, this.y, this.width, this.height);
         foreach (Component component; this.components) {
             component.render(tick);
         }

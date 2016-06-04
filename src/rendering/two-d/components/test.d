@@ -24,13 +24,16 @@ class TestComponent : Component
      */
     protected uint vao;
 
+    protected uint position;
+
     /**
      * The vertices.
      */
     protected float[] vertices = [
-         0.0f,  0.5f, // Vertex 1 (X, Y)
-         0.5f, -0.5f, // Vertex 2 (X, Y)
-        -0.5f, -0.5f, // Vertex 3 (X, Y)
+        -0.45f,  0.45f,
+         0.45f,  0.45f,
+         0.45f, -0.45f,
+        -0.45f, -0.45f,
     ];
 
     /**
@@ -38,32 +41,20 @@ class TestComponent : Component
      */
     public void load()
     {
-        glGenVertexArrays(1, &this.vao);
-        glBindVertexArray(vao);
-
-        string vertexShader = "#version 150\n"
-                              "in vec2 position;\n"
-                              "void main()\n"
-                              "{\n"
-                                "gl_Position = vec4(position, 0.0, 1.0);\n"
+        string vertexShader = "#version 450 core\n"
+                              "layout(location = 0) in vec2 position;\n"
+                              "void main() {\n"
+                                "gl_Position = vec4(position.x, position.y, 0.0, 1.0);\n"
                               "}";
 
-        string fragmentShader = "#version 150\n"
-                              "out vec4 colour;\n"
-                              "void main()\n"
-                              "{\n"
-                                "colour = vec4(1.0, 1.0, 1.0, 1.0);\n"
-                              "}";
+        string fragmentShader = "#version 450 core\n"
+                                "precision highp float;\n"
+                                "layout(location = 0) out vec4 gl_FragColor;\n"
+                                "void main() {\n"
+                                  "gl_FragColor = vec4(1.0, 1.0, 1.0, 1.0);\n"
+                                "}";
 
         this.program = Program.create(vertexShader, fragmentShader);
-
-        glGenBuffers(1, &this.vbo);
-        glBindBuffer(GL_ARRAY_BUFFER, this.vbo);
-        glBufferData(GL_ARRAY_BUFFER, this.vertices.sizeof, &this.vertices, GL_STATIC_DRAW);
-
-        auto position = glGetAttribLocation(this.program, "position");
-        glVertexAttribPointer(position, 2, GL_FLOAT, GL_FALSE, 0, null);
-        glEnableVertexAttribArray(position);
     }
 
     /**
@@ -71,7 +62,7 @@ class TestComponent : Component
      */
     public void unload()
     {
-        glDeleteBuffers(1, &this.vbo);
+        // ...
     }
 
     /**
@@ -95,8 +86,24 @@ class TestComponent : Component
     {
         glUseProgram(this.program);
 
+        glGenBuffers(1, &this.vbo);
         glBindBuffer(GL_ARRAY_BUFFER, this.vbo);
-        glDrawArrays(GL_TRIANGLES, 0, 3);
+        glBufferData(GL_ARRAY_BUFFER, this.vertices.sizeof, &this.vertices, GL_STATIC_DRAW);
+
+        glGenVertexArrays(1, &this.vao);
+        glBindVertexArray(this.vao);
+
+        this.position = glGetAttribLocation(this.program, "position");
+        glEnableVertexAttribArray(this.position);
+        glVertexAttribPointer(this.position, 2, GL_FLOAT, GL_FALSE, 0, null);
+
+        glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
+        glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
+        glDrawArrays(GL_POINTS, 0, 4);
+
+        glDeleteVertexArrays(1, &this.vao);
+        glDeleteBuffers(1, &this.vbo);
 
         assert(glGetError() == GL_NO_ERROR, "GL error!");
     }

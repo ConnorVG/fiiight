@@ -86,7 +86,7 @@ struct Program
         glAttachShader(program, vertexShader);
         glAttachShader(program, fragmentShader);
 
-        glBindFragDataLocation(program, 0, "colour");
+        glBindFragDataLocation(program, 0, "color");
 
         glLinkProgram(program);
 
