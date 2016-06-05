@@ -1,19 +1,76 @@
 {
 	"name": "fiiight",
-	"description": "A side-scrolling war game.",
+	"description": "A 2d side-scrolling action game.",
+
     "authors": [ "Connor S. Parks" ],
+
     "version": "0.0.1",
-    "sourcePath" : "src",
+
+    "mainSourceFile": "src/app.d",
+    "sourcePaths": [],
+
     "targetType": "executable",
     "targetPath" : "bin",
-    "dependencies": {
-        "derelict-glfw3": "~>3.0.0",
-        "derelict-gl3": "~>1.0.18",
-        "entitysysd": "~>2.4.1"
-    },
-    "subPackages": [
-        "./lib/box2d/",
+
+    "copyFiles": [
+        "lib"
     ],
+
+    "dependencies": {
+        ":common": "*",
+        ":engine": "*",
+        ":game": "*",
+        "derelict-glfw3": "~>3.0.0"
+    },
+
+    "subPackages": [
+        {
+            "name": "common",
+            "description": "The fiiight game common library.",
+
+            "version": "0.0.1",
+
+            "sourcePaths": ["src/common"],
+
+            "targetType": "staticLibrary",
+            "targetPath" : "lib"
+        },
+        {
+            "name": "engine",
+            "description": "The fiiight game engine.",
+
+            "version": "0.0.1",
+
+            "sourcePaths": ["src/engine"],
+
+            "targetType": "staticLibrary",
+            "targetPath" : "lib",
+
+            "dependencies": {
+                "fiiight:common": "*",
+                "derelict-glfw3": "~>3.0.0"
+            }
+        },
+        {
+            "name": "game",
+            "description": "The fiiight game logic.",
+
+            "version": "0.0.1",
+
+            "sourcePaths": ["src/game"],
+
+            "targetType": "staticLibrary",
+            "targetPath" : "lib",
+
+            "dependencies": {
+                "fiiight:common": "*",
+                "fiiight:engine": "*",
+                "derelict-glfw3": "~>3.0.0"
+            }
+        },
+        "./ext/box2d/"
+    ],
+
 	"copyright": "Copyright © 2016, Connor S. Parks",
 	"license": "Custom"
 }
