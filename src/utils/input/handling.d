@@ -41,6 +41,29 @@ struct InputHandler
     }
 
     /**
+     * Registers a key input command.
+     *
+     * Params:
+     *      handler  =      the command handler
+     *      key      =      the key code
+     */
+    public void register(void delegate(bool, bool) handler, int key = int.max)
+    {
+        return register(InputType.KEY, new KeyInputCommand(handler), key);
+    }
+
+    /**
+     * Registers a char input command.
+     *
+     * Params:
+     *      handler  =      the command handler
+     */
+    public void register(void delegate(uint) handler)
+    {
+        return register(InputType.CHAR, new CharInputCommand(handler));
+    }
+
+    /**
      * Registers an input command.
      *
      * Params:
@@ -73,14 +96,15 @@ struct InputHandler
      *      scanCode  =     the scanCode
      *      active    =     the state
      *      mods      =     the mods
+     *      repeated  =     if it's a repeat
      */
-    public void fire(int key, int scanCode, bool active, int mods)
+    public void fire(int key, int scanCode, bool active, int mods, bool repeated)
     {
         if (! this.active || key !in this.keyCommands) {
             return;
         }
 
-        this.keyCommands[key].execute(active);
+        this.keyCommands[key].execute(active, repeated);
     }
 
     /**
@@ -169,13 +193,8 @@ struct InputFactory
      */
     public void handleKey(int key, int scanCode, int action, int mods)
     {
-        // Don't support key-repeat.
-        if (action > 1) {
-            return;
-        }
-
         foreach (InputHandler* inputHandler; parallel(this.handlers)) {
-            inputHandler.fire(key, scanCode, action == 1, mods);
+            inputHandler.fire(key, scanCode, action != 0, mods, action == 2);
         }
     }
 

@@ -8,6 +8,8 @@ import derelict.opengl3.gl3 :
     glEnableVertexAttribArray, glVertexAttribPointer, glDeleteBuffers, glDeleteVertexArrays,
     glDrawArrays, GL_FLOAT, GL_FALSE, GL_TRIANGLES, GL_ARRAY_BUFFER, GL_STATIC_DRAW;
 
+import std.random : uniform;
+
 class TestComponent : Component
 {
     /**
@@ -34,9 +36,9 @@ class TestComponent : Component
      * The vertices.
      */
     protected float[] vertices = [
-       -1.0f, -1.0f,
-        1.0f, -1.0f,
+        1.0f,  1.0f,
         0.0f,  1.0f,
+        0.0f,  0.0f,
     ];
 
     /**
@@ -47,7 +49,7 @@ class TestComponent : Component
      */
     public void load(Programs* programs)
     {
-        auto program = programs.get("2d-basic");
+        Program* program = programs.get("2d-basic-red");
 
         this.programs = programs;
         this.program = program.id;

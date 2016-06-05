@@ -1,11 +1,18 @@
 module fiiight.utils.gl;
 
+import fiiight.utils.files : Files, FileType;
+
 import derelict.opengl3.gl3 :
-    GLenum, glCreateShader, glShaderSource, glCompileShader, glGetShaderiv, glDeleteShader,
+    GLenum, glCreateShader, glShaderSource, glCompileShader, glGetShaderiv, glDeleteShader, glGetAttribLocation,
     glUseProgram, glCreateProgram, glAttachShader, glBindFragDataLocation, glLinkProgram, glGetProgramiv,
     GL_TRUE, GL_FALSE, GL_COMPILE_STATUS, GL_LINK_STATUS, GL_VERTEX_SHADER, GL_FRAGMENT_SHADER;
 
+import std.regex : ctRegex, matchAll, Captures;
+import std.string : toStringz;
+
 import core.memory : GC;
+
+auto attributeMatcher = ctRegex!(`layout\(location\s=\s\d+\).*\sin(?:\s[\w]+)*\s([\w]+);`);
 
 struct Programs
 {
@@ -14,6 +21,9 @@ struct Programs
      */
     private Program*[const string] programs;
 
+    /**
+     * The program currently in use.
+     */
     private uint using;
 
     /**
@@ -32,6 +42,35 @@ struct Programs
     }
 
     /**
+     * Load a program into the program collection.
+     *
+     * Params:
+     *      name            =       the program name
+     *      vertexShader    =       the vertex shader
+     *      fragmentShader  =       the fragment shader
+     */
+    public void load(const string name, const string vertexShader, const string fragmentShader)
+    {
+        string vertexShaderContent = Files.contents(FileType.VERTEX_SHADER, vertexShader);
+        string fragmentShaderContent = Files.contents(FileType.FRAGMENT_SHADER, fragmentShader);
+
+        uint id = Program.create(vertexShaderContent, fragmentShaderContent);
+        Program* program = Program.create(id);
+
+        this.use(id);
+
+        auto matches = matchAll(vertexShaderContent, attributeMatcher);
+
+        foreach (Captures!(string, ulong) match; matches) {
+            string attribute = match.back();
+
+            program.attributes[attribute] = glGetAttribLocation(id, attribute.toStringz);
+        }
+
+        this.set(name, program);
+    }
+
+    /**
      * Get a registered program.
      */
     public Program* get(const string name)
@@ -47,6 +86,12 @@ struct Programs
         this.programs[name] = program;
     }
 
+    /**
+     * Set the program to use.
+     *
+     * Params:
+     *      program  =      the program to use
+     */
     public void use(uint program)
     {
         if (this.using == program) {

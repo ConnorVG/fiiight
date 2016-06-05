@@ -59,30 +59,9 @@ struct Process
      */
     protected void loadPrograms()
     {
-        uint id;
-        string vertexShader, fragmentShader;
-        Program* program;
-
-        // 2d-basic
-        vertexShader = "#version 450 core\n"
-                       "layout(location = 0) in vec2 position;\n"
-                       "void main() {\n"
-                         "gl_Position = vec4(position, 0.0, 1.0);\n"
-                       "}";
-
-        fragmentShader = "#version 450 core\n"
-                         "precision highp float;\n"
-                         "layout(location = 0) out vec4 colour;\n"
-                         "void main() {\n"
-                           "colour = vec4(1.0, 1.0, 1.0, 1.0);\n"
-                         "}";
-
-        id = Program.create(vertexShader, fragmentShader);
-        program = Program.create(id);
-
-        program.attributes["position"] = glGetAttribLocation(program.id, "position");
-
-        this.programs.set("2d-basic", program);
+        this.programs.load("2d-basic", "2d-basic-position-colour", "basic-colour");
+        this.programs.load("2d-basic-red", "2d-basic-position", "basic-red");
+        this.programs.load("2d-basic-blue", "2d-basic-position", "basic-blue");
     }
 
     /**

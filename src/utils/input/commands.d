@@ -10,7 +10,7 @@ class KeyInputCommand : InputCommand
     /**
      * The command handler.
      */
-    protected void delegate(bool) handler;
+    protected void delegate(bool, bool) handler;
 
     /**
      * Construct with the command handler.
@@ -18,7 +18,7 @@ class KeyInputCommand : InputCommand
      * Params:
      *      handler  =      the command handler
      */
-    public this(void delegate(bool) handler)
+    public this(void delegate(bool, bool) handler)
     {
         this.handler = handler;
     }
@@ -27,11 +27,12 @@ class KeyInputCommand : InputCommand
      * Execute the command.
      *
      * Params:
-     *      active  =       the state of the key
+     *      active    =     the state of the key
+     *      repeated  =     if it's a repeat
      */
-    public void execute(bool active)
+    public void execute(bool active, bool repeat)
     {
-        this.handler(active);
+        this.handler(active, repeat);
     }
 }
 
