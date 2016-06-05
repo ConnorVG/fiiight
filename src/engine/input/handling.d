@@ -19,12 +19,12 @@ struct InputHandler
     /**
      * The mouse command bindings.
      */
-    protected ICommand[MouseButton] mouseCommands;
+    protected ICommand[int] mouseCommands;
 
     /**
      * The key command bindings.
      */
-    protected ICommand[Key] keyCommands;
+    protected ICommand[int] keyCommands;
 
     /**
      * The char command bindings.
@@ -164,7 +164,7 @@ struct InputHandler
      * Params:
      *      character  =        the character
      */
-    public void fire(char character)
+    public void fire(wchar character)
     {
         foreach (ref command; parallel(this.charCommands)) {
             if (auto charCommand = cast(CharInputCommand) command) {
@@ -217,6 +217,16 @@ struct InputFactory
     @disable this();
 
     /**
+     * Creates an input factory.
+     *
+     * Returns: the input factory pointer
+     */
+    public static InputFactory* create()
+    {
+        return cast(InputFactory*) GC.calloc(InputFactory.sizeof);
+    }
+
+    /**
      * Register a new input handler.
      *
      * Params:
@@ -236,6 +246,21 @@ struct InputFactory
     public void unregister(InputHandler* inputHandler)
     {
         this.handlers.remove!(handler => handler == inputHandler);
+    }
+
+    /**
+     * Handles a mouse input event.
+     *
+     * Params:
+     *      button    =     the button
+     *      action    =     the action
+     *      modifier  =     the modifier
+     */
+    public void handleMouse(MouseButton button, Action action, Modifier modifier)
+    {
+        foreach (InputHandler* inputHandler; parallel(this.handlers)) {
+            inputHandler.fire(button, action, modifier);
+        }
     }
 
     /**
@@ -259,7 +284,7 @@ struct InputFactory
      * Params:
      *      character  =        the character
      */
-    public void handleChar(char character)
+    public void handleChar(wchar character)
     {
         foreach (InputHandler* inputHandler; parallel(this.handlers)) {
             inputHandler.fire(character);

@@ -20,7 +20,7 @@
         ":common": "*",
         ":engine": "*",
         ":game": "*",
-        "derelict-glfw3": "~>3.0.0"
+        ":fiiight": "*"
     },
 
     "subPackages": [
@@ -48,7 +48,8 @@
 
             "dependencies": {
                 "fiiight:common": "*",
-                "derelict-glfw3": "~>3.0.0"
+                "derelict-glfw3": "~>3.0.0",
+                "derelict-gl3": "~>1.0.18"
             }
         },
         {
@@ -65,7 +66,25 @@
             "dependencies": {
                 "fiiight:common": "*",
                 "fiiight:engine": "*",
-                "derelict-glfw3": "~>3.0.0"
+                "derelict-glfw3": "~>3.0.0",
+                "derelict-gl3": "~>1.0.18"
+            }
+        },
+        {
+            "name": "fiiight",
+            "description": "The fiiight game implementation.",
+
+            "version": "0.0.1",
+
+            "sourcePaths": ["src/fiiight"],
+
+            "targetType": "staticLibrary",
+            "targetPath" : "lib",
+
+            "dependencies": {
+                "fiiight:game": "*",
+                "derelict-glfw3": "~>3.0.0",
+                "derelict-gl3": "~>1.0.18"
             }
         },
         "./ext/box2d/"

@@ -1,7 +1,12 @@
 module engine.engine;
 
 import engine.window : Window;
+import engine.window.data : WindowUserData;
+import engine.window.events : bindCallbacks;
+import engine.input : InputFactory;
 import common : Settings;
+
+import derelict.glfw3.glfw3 : GLFWwindow, glfwSetWindowUserPointer;
 
 import core.memory : GC;
 
@@ -11,6 +16,11 @@ struct Engine
      * The window.
      */
     private Window* window;
+
+    /**
+     * The window user data.
+     */
+    private WindowUserData* windowUserData;
 
     /**
      * The settings.
@@ -45,7 +55,10 @@ struct Engine
      */
     public void boot()
     {
-        // ...
+        this.windowUserData = WindowUserData.create();
+
+        this.windowUserData.engine = &this;
+        this.windowUserData.inputFactory = InputFactory.create();
     }
 
     /**
@@ -65,14 +78,29 @@ struct Engine
         bool fullscreen = this.settings.fullscreen,
         bool borderless = this.settings.borderless
     ) {
-        // ...
+        this.window.open(title, width, height, fullscreen, borderless);
+
+        glfwSetWindowUserPointer(this.window.pointer(), this.windowUserData);
+        bindCallbacks(this.window.pointer());
     }
 
     /**
      * Closes the engine window.
+     *
+     * Todo: game.stop()
      */
     public void close()
     {
-        // ...
+        this.window.close();
+    }
+
+    /**
+     * Get the GLFWwindow instance.
+     *
+     * Returns: the GLFWwindow instance
+     */
+    public GLFWwindow* glfwWindow()
+    {
+        return this.window.pointer();
     }
 }

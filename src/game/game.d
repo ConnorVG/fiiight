@@ -1,7 +1,11 @@
 module game.game;
 
+import game.state : IState;
 import common : Settings;
 import engine : Engine;
+
+import derelict.glfw3.glfw3 : glfwPollEvents, glfwSwapBuffers;
+import derelict.opengl3.gl3 : glClear, GL_COLOR_BUFFER_BIT, GL_DEPTH_BUFFER_BIT;
 
 import std.parallelism : TaskPool;
 
@@ -61,7 +65,7 @@ struct Game
     /**
      * Starts the game.
      */
-    public void start()
+    public void start(IState* state)
     {
         this.engine.open(
             "fiiight [common:0.0.1, engine:0.0.1, game:0.0.1]",
@@ -71,23 +75,28 @@ struct Game
             this.settings.borderless
         );
 
-        this.run();
+        state.load();
+
+        this.run(state);
     }
 
     /**
      * Runs the game loop.
      */
-    private void run()
+    private void run(IState* state)
     {
         this.running = true;
 
-        ubyte updateRate = cast(ubyte) (1000 / this.settings.updateRate);
-        ubyte renderRate = cast(ubyte) (1000 / this.settings.renderRate);
+        float updateRateBase = 1000f / 30f;
+        float updateRate = 1000f / this.settings.updateRate;
+        float renderRate = 1000f / this.settings.renderRate;
 
         int updateDelay = 0;
         int renderDelay = 0;
 
         MonoTime before = MonoTime.currTime;
+
+        auto window = this.engine.glfwWindow();
 
         while (this.running) {
             MonoTime now = MonoTime.currTime;
@@ -97,21 +106,26 @@ struct Game
             TaskPool taskPool;
 
             updateDelay += elapsedTotal;
+
             if (updateDelay >= 0) {
-                float updateTick = updateRate / 32f;
+                glfwPollEvents();
+
+                float updateTick = updateRate / updateRateBase;
                 updateTick += updateTick * updateDelay / updateRate;
 
                 taskPool = new TaskPool();
-                // add updates to task pool
+                state.update(updateTick, &taskPool);
 
-                updateDelay = 0 - updateRate;
+                updateDelay = cast(int) -updateRate;
             }
 
             renderDelay += elapsedTotal;
             if (renderDelay >= 0) {
-                // ... render
+                glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+                state.render();
+                glfwSwapBuffers(window);
 
-                renderDelay = 0 - renderRate;
+                renderDelay = cast(int) -renderRate;
             }
 
             // Not sure if this should just be in the update block or not, honestly.
@@ -126,6 +140,8 @@ struct Game
 
             before = now;
         }
+
+        state.unload();
 
         this.engine.close();
     }

@@ -6,7 +6,7 @@ enum Types {
     MOUSE,
 }
 
-enum Key : uint {
+enum Key {
     UNKNOWN = 1,
 
     SPACE = 32,
@@ -144,10 +144,10 @@ enum Key : uint {
     RIGHT_SUPER = 347,
 
     MENU = 348,
-    LAST = 348,
+    LAST = MENU,
 }
 
-enum MouseButton : uint {
+enum MouseButton {
     ONE = 0,
     TWO = 1,
     THREE = 2,
@@ -157,14 +157,14 @@ enum MouseButton : uint {
     SEVEN = 6,
     EIGHT = 7,
 
-    LEFT = 0,
-    RIGHT = 1,
-    MIDDLE = 2,
+    LEFT = ONE,
+    RIGHT = TWO,
+    MIDDLE = THREE,
 
-    LAST = 7,
+    LAST = EIGHT,
 }
 
-enum Modifier : int {
+enum Modifier {
     SHIFT = 1,
     CONTROL = 2,
     ALT = 4,

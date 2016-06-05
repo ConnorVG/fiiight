@@ -1,8 +1,7 @@
-module fiiight;
-
 import common : Settings;
 import engine : Engine;
-import game : Game;
+import game : Game, IState;
+import fiiight : State;
 
 void main(string[] args)
 {
@@ -12,5 +11,8 @@ void main(string[] args)
     Game* game = Game.create(engine, settings);
 
     game.boot();
-    game.start();
+
+    IState state = new State();
+
+    game.start(&state);
 }
