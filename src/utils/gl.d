@@ -61,7 +61,7 @@ struct Programs
 
         auto matches = matchAll(vertexShaderContent, attributeMatcher);
 
-        foreach (Captures!(string, ulong) match; matches) {
+        foreach (match; matches) {
             string attribute = match.back();
 
             program.attributes[attribute] = glGetAttribLocation(id, attribute.toStringz);
