@@ -1,10 +1,7 @@
 {
 	"fileVersion": 1,
 	"versions": {
-		"derelict-gl3": "1.0.18",
 		"derelict-glfw3": "3.0.1",
-		"derelict-sdl2": "1.9.7",
-		"derelict-util": "2.0.6",
-		"entitysysd": "2.4.1"
+		"derelict-util": "2.0.6"
 	}
 }
