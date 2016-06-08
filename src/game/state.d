@@ -1,5 +1,7 @@
 module game.state;
 
+import engine : InputFactory;
+
 import std.parallelism : TaskPool;
 
 interface IState
@@ -7,7 +9,7 @@ interface IState
     /**
      * Load the state.
      */
-    void load();
+    void load(InputFactory* inputFactory);
 
     /**
      * Unload the state.

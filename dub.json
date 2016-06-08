@@ -17,9 +17,6 @@
     ],
 
     "dependencies": {
-        ":common": "*",
-        ":engine": "*",
-        ":game": "*",
         ":fiiight": "*"
     },
 
@@ -32,8 +29,13 @@
 
             "sourcePaths": ["src/common"],
 
-            "targetType": "staticLibrary",
-            "targetPath" : "lib"
+            "targetType": "library",
+            "targetPath" : "lib",
+
+            "dependencies": {
+                "derelict-gl3": "~>1.0.18",
+                "gl3n": "~>1.3.1"
+            }
         },
         {
             "name": "engine",
@@ -43,13 +45,14 @@
 
             "sourcePaths": ["src/engine"],
 
-            "targetType": "staticLibrary",
+            "targetType": "library",
             "targetPath" : "lib",
 
             "dependencies": {
                 "fiiight:common": "*",
                 "derelict-glfw3": "~>3.0.0",
-                "derelict-gl3": "~>1.0.18"
+                "derelict-gl3": "~>1.0.18",
+                "gl3n": "~>1.3.1"
             }
         },
         {
@@ -60,14 +63,15 @@
 
             "sourcePaths": ["src/game"],
 
-            "targetType": "staticLibrary",
+            "targetType": "library",
             "targetPath" : "lib",
 
             "dependencies": {
                 "fiiight:common": "*",
                 "fiiight:engine": "*",
                 "derelict-glfw3": "~>3.0.0",
-                "derelict-gl3": "~>1.0.18"
+                "derelict-gl3": "~>1.0.18",
+                "gl3n": "~>1.3.1"
             }
         },
         {
@@ -78,13 +82,14 @@
 
             "sourcePaths": ["src/fiiight"],
 
-            "targetType": "staticLibrary",
+            "targetType": "library",
             "targetPath" : "lib",
 
             "dependencies": {
                 "fiiight:game": "*",
                 "derelict-glfw3": "~>3.0.0",
-                "derelict-gl3": "~>1.0.18"
+                "derelict-gl3": "~>1.0.18",
+                "gl3n": "~>1.3.1"
             }
         },
         "./ext/box2d/"

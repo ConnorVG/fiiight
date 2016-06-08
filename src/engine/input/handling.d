@@ -290,4 +290,12 @@ struct InputFactory
             inputHandler.fire(character);
         }
     }
+
+    /**
+     * Clears the registered handlers.
+     */
+    void clear()
+    {
+        this.handlers = [];
+    }
 }

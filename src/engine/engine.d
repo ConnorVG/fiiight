@@ -99,7 +99,17 @@ struct Engine
      *
      * Returns: the GLFWwindow instance
      */
-    public GLFWwindow* glfwWindow()
+    public InputFactory* getInputFactory()
+    {
+        return this.windowUserData.inputFactory;
+    }
+
+    /**
+     * Get the GLFWwindow instance.
+     *
+     * Returns: the GLFWwindow instance
+     */
+    public GLFWwindow* getGlfwWindow()
     {
         return this.window.pointer();
     }

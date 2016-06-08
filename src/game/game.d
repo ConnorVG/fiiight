@@ -75,7 +75,7 @@ struct Game
             this.settings.borderless
         );
 
-        state.load();
+        state.load(this.engine.getInputFactory());
 
         this.run(state);
     }
@@ -96,7 +96,7 @@ struct Game
 
         MonoTime before = MonoTime.currTime;
 
-        auto window = this.engine.glfwWindow();
+        auto window = this.engine.getGlfwWindow();
 
         while (this.running) {
             MonoTime now = MonoTime.currTime;
@@ -106,7 +106,6 @@ struct Game
             TaskPool taskPool;
 
             updateDelay += elapsedTotal;
-
             if (updateDelay >= 0) {
                 glfwPollEvents();
 
@@ -118,6 +117,10 @@ struct Game
 
                 updateDelay = cast(int) -updateRate;
             }
+
+            now = MonoTime.currTime;
+            elapsed = now - before;
+            elapsedTotal = elapsed.total!"msecs";
 
             renderDelay += elapsedTotal;
             if (renderDelay >= 0) {
