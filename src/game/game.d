@@ -98,7 +98,7 @@ struct Game
 
         auto window = this.engine.getGlfwWindow();
 
-        while (this.running) {
+        while (this.running && ! this.engine.isClosed()) {
             MonoTime now = MonoTime.currTime;
             Duration elapsed = now - before;
             long elapsedTotal = elapsed.total!"msecs";
@@ -144,9 +144,11 @@ struct Game
             before = now;
         }
 
-        state.unload();
+        if (! this.engine.isClosed()) {
+            state.unload();
 
-        this.engine.close();
+            this.engine.close();
+        }
     }
 
     /**

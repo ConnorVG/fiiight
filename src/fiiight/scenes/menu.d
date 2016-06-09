@@ -1,15 +1,15 @@
 module fiiight.scenes.menu;
 
 import common : Programs;
-import engine : Texture, Textures, MatrixPolygon, Polygon, Polygons, PolygonData, RenderState = State;
+import engine : Textures, Texture, Polygons, Polygon, RenderState = State, TexturedMatrixPolygon, PolygonData;
 import game : IScene;
 
-import std.parallelism : TaskPool, task;
+import std.parallelism : TaskPool;
 
 class MenuScene : IScene
 {
-    protected Polygon triangle;
-    protected PolygonData*[] data;
+    protected Polygon poly;
+    protected PolygonData* polyData;
 
     /**
      * Loads the scene.
@@ -21,28 +21,32 @@ class MenuScene : IScene
      */
     public void load(Programs* programs, Textures* textures, Polygons* polygons)
     {
-        Polygon triangle = new MatrixPolygon([
-            -1.0f, -1.0f,
-            1.0f, -1.0f,
-            0.0f, 1.0f,
-        ]);
+        Texture texture = Texture("resources/textures/test.png");
 
-        triangle.load(programs);
+        this.poly = new TexturedMatrixPolygon([
+            0.25f, 0.25f,
+            0.75f, 0.25f,
+            0.75f, 0.75f,
+            0.25f, 0.75f,
+        ], [
+            0.25f, 0.25f,
+            0.75f, 0.25f,
+            0.75f, 0.75f,
+            0.25f, 0.75f,
+        ], &texture);
 
-        this.triangle = triangle;
-        polygons.set("triangle", triangle);
+        this.poly.load(programs);
 
-        this.data = [
-            PolygonData.create(),
-            PolygonData.create()
-        ];
+        this.polyData = PolygonData.create();
     }
 
     /**
      * Unloads the scene.
      */
     public void unload()
-    { /** */ }
+    {
+        // ...
+    }
 
     /**
      * Update the scene.
@@ -53,12 +57,7 @@ class MenuScene : IScene
      */
     public void update(const float tick, TaskPool* taskPool)
     {
-        void rotate(PolygonData* data, float rotation) {
-            data.rotation.x += rotation;
-        }
-
-        taskPool.put(task(&rotate, this.data[0], tick / 360));
-        taskPool.put(task(&rotate, this.data[1], -tick / 360));
+        // update ui
     }
 
     /**
@@ -69,8 +68,6 @@ class MenuScene : IScene
      */
     public void render(RenderState* renderState)
     {
-        foreach (PolygonData* data; this.data) {
-            renderState.render(this.triangle, data);
-        }
+        renderState.render(this.poly, this.polyData);
     }
 }

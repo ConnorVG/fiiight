@@ -1,5 +1,11 @@
 module engine.rendering.texture;
 
+import common : Images, Image;
+
+import derelict.opengl3.gl3 :
+    glGenTextures, glBindTexture, glTexImage2D, glTexParameteri, glGenerateMipmap,
+    GL_TEXTURE_2D, GL_RGBA, GL_UNSIGNED_BYTE, GL_TEXTURE_MAG_FILTER, GL_TEXTURE_MIN_FILTER, GL_LINEAR, GL_LINEAR_MIPMAP_LINEAR;
+
 import core.memory : GC;
 
 struct Texture
@@ -7,7 +13,7 @@ struct Texture
     /**
      * The texture id.
      */
-    protected const uint id;
+    public uint id;
 
     /**
      * Create a new texture.
@@ -17,7 +23,17 @@ struct Texture
      */
     public this(const string source)
     {
-        // ...
+        Image* image = Images.load(source);
+
+        glGenTextures(1, &this.id);
+        glBindTexture(GL_TEXTURE_2D, this.id);
+
+        glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, image.width, image.height, 0, GL_RGBA, GL_UNSIGNED_BYTE, image.pixels.ptr);
+
+        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR);
+
+        glGenerateMipmap(GL_TEXTURE_2D);
     }
 }
 

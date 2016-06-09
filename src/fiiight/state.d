@@ -55,9 +55,16 @@ class State : IState
         this.camera = Camera.create();
 
         this.programs = Programs.create();
+
         this.programs.load(
             "colour-matrix", "colour-matrix", "basic",
             [ "position" ],
+            [ "colour", "model", "view" ]
+        );
+
+        this.programs.load(
+            "texture-matrix", "texture-matrix", "texture",
+            [ "position", "texture" ],
             [ "colour", "model", "view" ]
         );
 

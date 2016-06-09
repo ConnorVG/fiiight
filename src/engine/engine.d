@@ -28,6 +28,11 @@ struct Engine
     private Settings* settings;
 
     /**
+     * The closed status.
+     */
+    private bool closed;
+
+    /**
      * We don't want the default construction to be possible.
      */
     @disable this();
@@ -46,6 +51,7 @@ struct Engine
 
         engine.window = Window.create();
         engine.settings = settings;
+        engine.closed = true;
 
         return engine;
     }
@@ -82,6 +88,8 @@ struct Engine
 
         glfwSetWindowUserPointer(this.window.pointer(), this.windowUserData);
         bindCallbacks(this.window.pointer());
+
+        this.closed = false;
     }
 
     /**
@@ -91,7 +99,17 @@ struct Engine
      */
     public void close()
     {
+        this.closed = true;
+
         this.window.close();
+    }
+
+    /**
+     * Whether or not the window is closed.
+     */
+    public bool isClosed()
+    {
+        return this.closed;
     }
 
     /**

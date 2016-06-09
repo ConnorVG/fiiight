@@ -14,9 +14,24 @@ class MatrixPolygon : Polygon
      */
     protected Program* program;
 
+    /**
+     * The position location.
+     */
     protected int attrPosition;
+
+    /**
+     * The colour location.
+     */
     protected int unifColour;
+
+    /**
+     * The view location.
+     */
     protected int unifView;
+
+    /**
+     * The model location.
+     */
     protected int unifModel;
 
     /**

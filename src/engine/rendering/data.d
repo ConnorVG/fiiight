@@ -38,7 +38,7 @@ struct PolygonData
     public static PolygonData* create(
         vec2 position = vec2(0f, 0f),
         vec2r rotation = vec2r(0f, 0f),
-        vec4 colour = vec4(0f, 0f, 0f, 1f)
+        vec4 colour = vec4(1f, 1f, 1f, 1f)
     ) {
         PolygonData* data = cast(PolygonData*) GC.malloc(PolygonData.sizeof);
 
