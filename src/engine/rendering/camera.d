@@ -4,6 +4,8 @@ import derelict.opengl3.gl3 : glUniformMatrix4fv, GL_TRUE;
 
 import gl3n.linalg : Vector, mat4;
 
+import std.parallelism : TaskPool;
+
 import core.memory : GC;
 
 alias vec2 = Vector!(float, 2);
@@ -56,7 +58,7 @@ struct Camera
      *      tick      =     the tick amount
      *      taskPool  =     the available task pool
      */
-    void update(const float tick, TaskPool* taskPool);
+    void update(const float tick, TaskPool* taskPool)
     {
         // handle camera effects
         // ...

@@ -94,7 +94,7 @@ class MatrixPolygon : Polygon
         glUniformMatrix4fv(this.unifView, 1, GL_TRUE, camera.matrix.value_ptr);
 
         foreach (ref data; datas) {
-            glUniform4f(this.unifColour, data.colour.x, data.colour.y, data.colour.z, data.colour.w);
+            glUniform4f(this.unifColour, data.colour.r, data.colour.g, data.colour.b, data.colour.a);
             glUniformMatrix4fv(this.unifModel, 1, GL_TRUE, data.matrix.value_ptr);
 
             glDrawArrays(GL_TRIANGLE_FAN, 0, cast(int) this.vertices.length / 2);

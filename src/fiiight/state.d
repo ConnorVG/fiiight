@@ -5,7 +5,7 @@ import common : Programs, Program;
 import engine : InputFactory, RenderState = State, Textures, Polygons, Camera;
 import game : IState, IScene;
 
-import std.parallelism : TaskPool;
+import std.parallelism : TaskPool, task;
 
 class State : IState
 {
@@ -43,6 +43,8 @@ class State : IState
      * The current scene.
      */
     protected IScene scene;
+
+    protected bool zoomIn = true;
 
     /**
      * Load the state.
@@ -103,6 +105,8 @@ class State : IState
             return;
         }
 
+        taskPool.put(task(&this.animateCamera, tick));
+
         this.scene.update(tick, taskPool);
     }
 
@@ -118,5 +122,26 @@ class State : IState
         this.renderState.clear();
         this.scene.render(this.renderState);
         this.renderState.render(this.camera);
+    }
+
+    void animateCamera(const float tick)
+    {
+        this.camera.rotation += tick / 60f;
+
+        if (this.zoomIn) {
+            this.camera.zoom += tick / 60f;
+
+            if (this.camera.zoom >= 2f) {
+                this.camera.zoom = 2f;
+                this.zoomIn = false;
+            }
+        } else {
+            this.camera.zoom -= tick / 60f;
+
+            if (this.camera.zoom <= 0f) {
+                this.camera.zoom = 0f;
+                this.zoomIn = true;
+            }
+        }
     }
 }

@@ -53,6 +53,6 @@ class PolygonData
     {
         return mat4.identity.scale(this.scale.x, this.scale.y, 1.0f)
                             .rotatez(-this.rotation)
-                            .translate(this.position.x * 2.0f - 1.0f, this.position.y * -2.0f + 1.0f, 0.0f);
+                            .translate(this.position.x * -2.0f + 1.0f, this.position.y * 2.0f - 1.0f, 0.0f);
     }
 }
