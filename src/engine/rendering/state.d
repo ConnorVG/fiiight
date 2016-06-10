@@ -1,8 +1,7 @@
 module engine.rendering.state;
 
 import engine.rendering.camera : Camera;
-import engine.rendering.data : PolygonData;
-import engine.rendering.polygon : Polygon;
+import engine.rendering.polygon : Polygon, PolygonData;
 
 import core.memory : GC;
 
@@ -11,7 +10,7 @@ struct State
     /**
      * The groups to render.
      */
-    protected PolygonData*[][Polygon] groups;
+    protected PolygonData[][Polygon] groups;
 
     /**
      * Creates an instance of state.
@@ -30,7 +29,7 @@ struct State
      *      polygon  =      the polygon
      *      data     =      the data
      */
-    public void render(Polygon polygon, PolygonData* data)
+    public void render(Polygon polygon, PolygonData data)
     {
         this.groups[polygon] ~= data;
     }

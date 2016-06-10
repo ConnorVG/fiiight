@@ -137,6 +137,10 @@ struct Programs
         const string[] attributes = [],
         const string[] uniforms = []
     ) {
+        if (name in this.programs) {
+            return;
+        }
+
         string vertexShaderContent = Files.contents(FileType.VERTEX_SHADER, vertexShader);
         string fragmentShaderContent = Files.contents(FileType.FRAGMENT_SHADER, fragmentShader);
 

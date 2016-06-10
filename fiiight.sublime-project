@@ -1,0 +1,20 @@
+{
+	"folders":
+	[
+		{
+			"path": "src/common"
+		},
+		{
+			"path": "src/engine"
+		},
+		{
+			"path": "src/game"
+		},
+		{
+			"path": "src/fiiight"
+		},
+		{
+			"path": "resources"
+		}
+	]
+}

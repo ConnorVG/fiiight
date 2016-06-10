@@ -2,7 +2,7 @@ module engine.rendering.polygon.textured_matrix_polygon;
 
 import engine.rendering.camera : Camera;
 import engine.rendering.texture : Texture;
-import engine.rendering.data : PolygonData;
+import engine.rendering.polygon.data : PolygonData;
 import engine.rendering.polygon.matrix_polygon : MatrixPolygon;
 import common : Programs;
 
@@ -96,7 +96,7 @@ class TexturedMatrixPolygon : MatrixPolygon
      *      camera  =       the camera
      *      datas   =       the data collection
      */
-    public override void render(Camera* camera, PolygonData*[] datas) const
+    public override void render(Camera* camera, PolygonData[] datas) const
     {
         glUseProgram(this.program.id);
 
@@ -105,19 +105,11 @@ class TexturedMatrixPolygon : MatrixPolygon
         glBindTexture(GL_TEXTURE_2D, this.texture.id);
         glActiveTexture(GL_TEXTURE0);
 
-        foreach (PolygonData* data; datas) {
+        foreach (ref data; datas) {
             glUniformMatrix4fv(this.unifModel, 1, GL_TRUE, data.matrix.value_ptr);
             glUniform4f(this.unifColour, data.colour.x, data.colour.y, data.colour.z, data.colour.w);
 
             glDrawArrays(GL_TRIANGLE_FAN, 0, cast(int) this.vertices.length / 2);
         }
-    }
-
-    /**
-     * Unbinds the VBAs and VBOs.
-     */
-    public override void unbind() const
-    {
-        super.unbind();
     }
 }

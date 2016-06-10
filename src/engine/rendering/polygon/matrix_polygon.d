@@ -1,7 +1,7 @@
 module engine.rendering.polygon.matrix_polygon;
 
 import engine.rendering.camera : Camera;
-import engine.rendering.data : PolygonData;
+import engine.rendering.polygon.data : PolygonData;
 import engine.rendering.polygon.polygon : Polygon;
 import common : Program, Programs;
 
@@ -87,25 +87,17 @@ class MatrixPolygon : Polygon
      *      camera  =       the camera
      *      datas   =       the data collection
      */
-    public override void render(Camera* camera, PolygonData*[] datas) const
+    public override void render(Camera* camera, PolygonData[] datas) const
     {
         glUseProgram(this.program.id);
 
         glUniformMatrix4fv(this.unifView, 1, GL_TRUE, camera.matrix.value_ptr);
 
-        foreach (PolygonData* data; datas) {
+        foreach (ref data; datas) {
             glUniform4f(this.unifColour, data.colour.x, data.colour.y, data.colour.z, data.colour.w);
             glUniformMatrix4fv(this.unifModel, 1, GL_TRUE, data.matrix.value_ptr);
 
-            glDrawArrays(GL_TRIANGLES, 0, cast(int) this.vertices.length / 2);
+            glDrawArrays(GL_TRIANGLE_FAN, 0, cast(int) this.vertices.length / 2);
         }
-    }
-
-    /**
-     * Unbinds the VBAs and VBOs.
-     */
-    public override void unbind() const
-    {
-        super.unbind();
     }
 }

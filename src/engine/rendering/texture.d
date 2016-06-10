@@ -6,6 +6,9 @@ import derelict.opengl3.gl3 :
     glGenTextures, glBindTexture, glTexImage2D, glTexParameteri, glGenerateMipmap,
     GL_TEXTURE_2D, GL_RGBA, GL_UNSIGNED_BYTE, GL_TEXTURE_MAG_FILTER, GL_TEXTURE_MIN_FILTER, GL_LINEAR, GL_LINEAR_MIPMAP_LINEAR;
 
+import std.conv : to;
+import std.array : replace;
+
 import core.memory : GC;
 
 struct Texture
@@ -23,7 +26,7 @@ struct Texture
      */
     public this(const string source)
     {
-        Image* image = Images.load(source);
+        Image* image = Images.load(to!string("resources/textures/" ~ source.dup.replace(".", "/") ~ ".png"));
 
         glGenTextures(1, &this.id);
         glBindTexture(GL_TEXTURE_2D, this.id);
@@ -57,6 +60,24 @@ struct Textures
     public static Textures* create()
     {
         return cast(Textures*) GC.calloc(Textures.sizeof);
+    }
+
+    /**
+     * Load a texture.
+     *
+     * Params:
+     *      name    =       the name
+     *      source  =       the source
+     */
+    public void load(const string name, const string source = null)
+    {
+        if (name in this.textures) {
+            return;
+        }
+
+        Texture texture = Texture(source == null ? name : source);
+
+        this.set(name, &texture);
     }
 
     /**

@@ -1,13 +1,23 @@
 module engine.rendering.polygon.polygon;
 
 import engine.rendering.camera : Camera;
-import engine.rendering.data : PolygonData;
+import engine.rendering.polygon.data : PolygonData;
 import engine.rendering.texture : Texture;
 import common : Programs;
 
 import derelict.opengl3.gl3;
 
 import core.memory : GC;
+
+enum Shapes : float[]
+{
+    RECTANGLE = [
+        -1.0f, 1.0f,
+        1.0f, 1.0f,
+        1.0f, -1.0f,
+        -1.0f, -1.0f,
+    ],
+}
 
 class Polygon
 {
@@ -77,7 +87,7 @@ class Polygon
      *      camera  =       the camera
      *      datas   =       the data collection
      */
-    public void render(Camera* camera, PolygonData*[] datas) const
+    public void render(Camera* camera, PolygonData[] datas) const
     {
         // foreach (PolygonData* data; datas) {
         //     // ...

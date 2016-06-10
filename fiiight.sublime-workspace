@@ -1,0 +1,975 @@
+{
+	"auto_complete":
+	{
+		"selected_items":
+		[
+			[
+				"frag",
+				"fragmentShaderContent"
+			],
+			[
+				"inputR",
+				"inputFactory"
+			],
+			[
+				"glfwWin",
+				"glfwWindowHint"
+			],
+			[
+				"vert",
+				"vertexShader"
+			],
+			[
+				"gl",
+				"glfwGetFramebufferSize"
+			],
+			[
+				"input",
+				"inputHandler"
+			],
+			[
+				"inu",
+				"InputHandler"
+			],
+			[
+				"Menu",
+				"MenuSceneType"
+			],
+			[
+				"Inpu",
+				"InputType"
+			],
+			[
+				"glfwSet",
+				"glfwSetWindowUserPointer"
+			],
+			[
+				"GLFWVE",
+				"GLFW_VERSION_MAJOR"
+			],
+			[
+				"glfw",
+				"glfwSwapBuffers"
+			],
+			[
+				"glfwwin",
+				"GLFWwindow"
+			],
+			[
+				"GLFW",
+				"GLFW_OPENGL_DEBUG_CONTEXT"
+			],
+			[
+				"groundb",
+				"groundBox"
+			],
+			[
+				"_instan",
+				"_instantiated"
+			],
+			[
+				"param",
+				"parameters"
+			],
+			[
+				"par",
+				"parameters"
+			],
+			[
+				"para",
+				"parameter"
+			],
+			[
+				"Para",
+				"Parameter"
+			],
+			[
+				"_",
+				"_parser"
+			],
+			[
+				"glfwCreatewin",
+				"glfwCreateWindowSurface"
+			],
+			[
+				"pappl",
+				"pApplicationName"
+			],
+			[
+				"instance",
+				"instanceExtensionsAppender"
+			],
+			[
+				"pApplicatio",
+				"pApplicationName"
+			],
+			[
+				"quef",
+				"queueFamilyIndex"
+			],
+			[
+				"queu",
+				"queueFlags"
+			],
+			[
+				"num",
+				"numProperties"
+			],
+			[
+				"EVENT_DRAG",
+				"EVENT_DRAG_BEGIN"
+			],
+			[
+				"e",
+				"HTMLCanvasElement"
+			],
+			[
+				"locate",
+				"locateAttributes"
+			],
+			[
+				"WebGL",
+				"WebGLRenderingContext"
+			],
+			[
+				"get",
+				"getAttribLocation"
+			],
+			[
+				"shad",
+				"shaderProgram"
+			],
+			[
+				"target",
+				"_target"
+			],
+			[
+				"swap",
+				"swapSlot"
+			],
+			[
+				"contain",
+				"container1"
+			],
+			[
+				"inlin",
+				"inline-block"
+			],
+			[
+				"box",
+				"box-sizing"
+			],
+			[
+				"artic",
+				"article"
+			],
+			[
+				"lang",
+				"language"
+			],
+			[
+				"gri",
+				"inline-grid"
+			],
+			[
+				"fMark",
+				"fMarked_renderer"
+			],
+			[
+				"arti",
+				"article"
+			],
+			[
+				"art",
+				"article"
+			],
+			[
+				"status",
+				"statusText"
+			],
+			[
+				"relations",
+				"relationships"
+			],
+			[
+				"Transf",
+				"TransformerAbstract"
+			]
+		]
+	},
+	"buffers":
+	[
+	],
+	"build_system": "",
+	"build_system_choices":
+	[
+	],
+	"build_varint": "",
+	"command_palette":
+	{
+		"height": 75.0,
+		"last_filter": "addfo",
+		"selected_items":
+		[
+			[
+				"addfo",
+				"Project: Add Folder"
+			],
+			[
+				"adf",
+				"Project: Add Folder"
+			],
+			[
+				"glsl",
+				"Set Syntax: GLSL"
+			],
+			[
+				"instal",
+				"Package Control: Install Package"
+			],
+			[
+				"addf",
+				"Project: Add Folder"
+			],
+			[
+				"word",
+				"Word Wrap: Toggle"
+			],
+			[
+				"d",
+				"Set Syntax: D"
+			],
+			[
+				"remove",
+				"Package Control: Remove Package"
+			],
+			[
+				"install",
+				"Package Control: Install Package"
+			],
+			[
+				"lower",
+				"Convert Case: Lower Case"
+			],
+			[
+				"insta",
+				"Package Control: Install Package"
+			],
+			[
+				"javascr",
+				"Set Syntax: JavaScript"
+			],
+			[
+				"adfo",
+				"Project: Add Folder"
+			],
+			[
+				"vue",
+				"Set Syntax: Vue Component"
+			],
+			[
+				"folder",
+				"Project: Add Folder"
+			],
+			[
+				"color",
+				"Color Picker"
+			],
+			[
+				"colopi",
+				"Color Picker"
+			],
+			[
+				"colorpi",
+				"Color Picker"
+			],
+			[
+				"colorp",
+				"Color Picker"
+			],
+			[
+				"colo",
+				"Color Picker"
+			],
+			[
+				"picker",
+				"Color Picker"
+			],
+			[
+				"pretty",
+				"HTMLPrettify"
+			],
+			[
+				"todo",
+				"TodoReview: Project Files"
+			],
+			[
+				"isntall",
+				"Package Control: Install Package"
+			],
+			[
+				"inst",
+				"Package Control: Install Package"
+			],
+			[
+				"isnta",
+				"Package Control: Install Package"
+			]
+		],
+		"width": 407.0
+	},
+	"console":
+	{
+		"height": 126.0,
+		"history":
+		[
+			"import urllib.request,os,hashlib; h = '2915d1851351e5ee549c20394736b442' + '8bc59f460fa1548d1514676163dafc88'; pf = 'Package Control.sublime-package'; ipp = sublime.installed_packages_path(); urllib.request.install_opener( urllib.request.build_opener( urllib.request.ProxyHandler()) ); by = urllib.request.urlopen( 'http://packagecontrol.io/' + pf.replace(' ', '%20')).read(); dh = hashlib.sha256(by).hexdigest(); print('Error validating download (got %s instead of %s), please try manual install' % (dh, h)) if dh != h else open(os.path.join( ipp, pf), 'wb' ).write(by)"
+		]
+	},
+	"distraction_free":
+	{
+		"menu_visible": true,
+		"show_minimap": false,
+		"show_open_files": false,
+		"show_tabs": false,
+		"side_bar_visible": false,
+		"status_bar_visible": false
+	},
+	"expanded_folders":
+	[
+		"/home/connor/Projects/D-Lang/fiiight/src/engine",
+		"/home/connor/Projects/D-Lang/fiiight/src/engine/rendering",
+		"/home/connor/Projects/D-Lang/fiiight/src/engine/rendering/polygon",
+		"/home/connor/Projects/D-Lang/fiiight/src/engine/rendering/polygon/data",
+		"/home/connor/Projects/D-Lang/fiiight/src/fiiight",
+		"/home/connor/Projects/D-Lang/fiiight/src/fiiight/scenes",
+		"/home/connor/Projects/D-Lang/fiiight/resources",
+		"/home/connor/Projects/D-Lang/fiiight/resources/shaders"
+	],
+	"file_history":
+	[
+		"/home/connor/Projects/D-Lang/fiiight/src/engine/rendering/polygon/text_matrix_polygon.d",
+		"/home/connor/Projects/D-Lang/fiiight/src/fiiight/scenes/menu.d",
+		"/home/connor/Projects/D-Lang/fiiight/src/engine/rendering/polygon/data/data.d",
+		"/home/connor/Projects/D-Lang/fiiight/src/engine/rendering/camera.d",
+		"/home/connor/Projects/D-Lang/fiiight/src/engine/rendering/polygon/polygon.d",
+		"/home/connor/Projects/D-Lang/fiiight/src/engine/rendering/polygon/data/text_data.d",
+		"/home/connor/Projects/D-Lang/fiiight/resources/shaders/vertex/colour-matrix.glsl",
+		"/home/connor/Projects/D-Lang/fiiight/resources/shaders/vertex/texture-matrix.glsl",
+		"/home/connor/Projects/D-Lang/fiiight/src/engine/rendering/polygon/matrix_polygon.d",
+		"/home/connor/Projects/D-Lang/fiiight/.dub/old_src/utils/gl.d",
+		"/home/connor/Projects/D-Lang/fiiight/.dub/resources/shaders/vertex/2d-basic-position-colour.glsl",
+		"/home/connor/Projects/D-Lang/fiiight/.dub/resources/shaders/fragment/basic-colour.glsl",
+		"/home/connor/Projects/D-Lang/Vulkan/source/app.d",
+		"/home/connor/Projects/D-Lang/Vulkan/source/GlfwVulkanLoader.d",
+		"/home/connor/Projects/D-Lang/fiiight/src/engine/package.d",
+		"/home/connor/Projects/D-Lang/fiiight/src/package.d",
+		"/home/connor/Projects/D-Lang/fiiight/src/game/package.d",
+		"/home/connor/Projects/D-Lang/fiiight/dub.json",
+		"/home/connor/Projects/D-Lang/fiiight/src/engine/platform/window.d",
+		"/home/connor/Projects/D-Lang/fiiight/src/rendering/two-d/components/text.d",
+		"/home/connor/Projects/D-Lang/fiiight/src/utils/gl.d",
+		"/home/connor/Projects/D-Lang/fiiight/src/scenes/menu.d",
+		"/home/connor/Projects/D-Lang/fiiight/src/rendering/two-d/components/button.d",
+		"/home/connor/Projects/D-Lang/fiiight/src/core/process.d",
+		"/home/connor/Projects/D-Lang/fiiight/resources/shaders/vertex/2d-basic-position-colour.glsl",
+		"/home/connor/Projects/D-Lang/fiiight/resources/shaders/fragment/basic-colour.glsl",
+		"/home/connor/Projects/D-Lang/fiiight/src/rendering/two-d/components/container.d",
+		"/home/connor/Projects/D-Lang/fiiight/src/rendering/two-d/components/package.d",
+		"/home/connor/Projects/D-Lang/fiiight/src/rendering/two-d/component.d",
+		"/home/connor/Projects/D-Lang/fiiight/src/rendering/two-d/components/test.d",
+		"/home/connor/Projects/D-Lang/fiiight/resources/shaders/fragment/basic-blue.glsl",
+		"/home/connor/Projects/D-Lang/fiiight/src/utils/files.d",
+		"/home/connor/Projects/D-Lang/fiiight/resources/shaders/vertex/2d-basic-position.glsl",
+		"/home/connor/Projects/D-Lang/fiiight/resources/shaders/fragment/basic-red.glsl",
+		"/home/connor/Projects/D-Lang/fiiight/src/utils/input/handling.d",
+		"/home/connor/Projects/D-Lang/fiiight/resources/shaders/2d-basic.shader",
+		"/home/connor/Projects/D-Lang/fiiight/src/utils/input/commands.d",
+		"/home/connor/Projects/D-Lang/fiiight/src/core/game.d",
+		"/home/connor/Projects/D-Lang/fiiight/src/core/platform/window.d",
+		"/home/connor/Projects/D-Lang/fiiight/src/rendering/two-d/frame.d",
+		"/home/connor/Projects/D-Lang/fiiight/src/scenes/game.d",
+		"/home/connor/Projects/D-Lang/fiiight/src/scenes/loading.d",
+		"/home/connor/Projects/D-Lang/fiiight/src/core/scene.d",
+		"/home/connor/Projects/Electron/Cage/src/rats/engine/src/rendering/shaders/impl/2d/Fragment.js",
+		"/home/connor/Projects/Electron/Cage/src/rats/engine/src/rendering/shaders/impl/2d/Vertex.js",
+		"/home/connor/Projects/D-Lang/fiiight/README.md",
+		"/home/connor/Projects/D-Lang/fiiight/src/utils/___input.d",
+		"/home/connor/Projects/D-Lang/fiiight/src/utils/input/package.d",
+		"/home/connor/Projects/D-Lang/fiiight/src/utils/input/types.d",
+		"/home/connor/Projects/D-Lang/fiiight/src/utils/input.d",
+		"/home/connor/Projects/D-Lang/fiiight/src/core/platform/settings.d",
+		"/home/connor/Projects/D-Lang/fiiight/.dub/_old/package.d",
+		"/home/connor/Projects/D-Lang/fiiight/.travis.yml",
+		"/home/connor/Projects/D-Lang/fiiight/dub.selections.json",
+		"/home/connor/Projects/D-Lang/fiiight/.editorconfig",
+		"/home/connor/Projects/D-Lang/fiiight/LICENSE",
+		"/home/connor/Projects/D-Lang/fiiight/source/core/process.d",
+		"/home/connor/Projects/D-Lang/fiiight/source/core/game.d",
+		"/home/connor/Projects/D-Lang/fiiight/source/package.d",
+		"/home/connor/Projects/D-Lang/fiiight/source/core/platform/window.d",
+		"/home/connor/Projects/D-Lang/fiiight/_old/package.d",
+		"/home/connor/Projects/D-Lang/fiiight/source/core/platform/settings.d",
+		"/home/connor/Projects/D-Lang/fiiight/_old/platform/booter.d",
+		"/home/connor/Projects/D-Lang/fiiight/_old/platform/window.d",
+		"/home/connor/Projects/D-Lang/fiiight/source/core/platform/gl.d",
+		"/home/connor/Projects/D-Lang/fiiight/source/platform/window.d",
+		"/home/connor/Projects/D-Lang/fiiight/_old_game/game.d",
+		"/home/connor/Projects/D-Lang/fiiight/source/game/systems/physics.d",
+		"/home/connor/Projects/D-Lang/fiiight/source/game/systems/render.d",
+		"/home/connor/Projects/D-Lang/fiiight/source/platform/booter.d",
+		"/home/connor/Projects/D-Lang/fiiight/source/game/systems/rendering/debugDraw.d",
+		"/home/connor/Projects/D-Lang/fiiight/source/game/process.d",
+		"/home/connor/Projects/D-Lang/fiiight/source/game/systems/render/debug.d",
+		"/home/connor/Projects/D-Lang/fiiight/bin/.gitignore",
+		"/home/connor/Projects/D-Lang/fiiight/source/game/components/renderable.d",
+		"/home/connor/Projects/D-Lang/fiiight/source/platform/Window.d",
+		"/home/connor/Projects/D-Lang/fiiight/source/fiiight.d",
+		"/home/connor/Projects/D-Lang/fiiight/.gitignore",
+		"/home/connor/Projects/D-Lang/d-wtf/source/wtf/generator.d",
+		"/home/connor/Projects/D-Lang/d-wtf/source/wtf/command.d",
+		"/home/connor/Projects/D-Lang/d-wtf/source/wtf/parser.d",
+		"/home/connor/Projects/D-Lang/d-wtf/source/wtf/manager.d",
+		"/home/connor/Projects/D-Lang/d-wtf-test/source/app.d",
+		"/home/connor/Projects/D-Lang/d-wtf/source/wtf/parameter.d",
+		"/home/connor/Projects/D-Lang/d-wtf/source/wtf/argument.d",
+		"/home/connor/Projects/D-Lang/d-wtf/source/wtf/package.d",
+		"/home/connor/Projects/D-Lang/d-wtf-test/dub.json",
+		"/home/connor/Projects/D-Lang/d-wtf/.dub/dub.json",
+		"/home/connor/Projects/D-Lang/d-wtf/source/wtf.d",
+		"/home/connor/Projects/D-Lang/d-wtf-test/.editorconfig",
+		"/home/connor/Projects/D-Lang/d-wtf/dub.json",
+		"/home/connor/Projects/D-Lang/d-wtf/.editorconfig",
+		"/home/connor/Projects/D-Lang/Vulkan/dub.json",
+		"/home/connor/Projects/D-Lang/Vulkan/source/_examples/layers.d",
+		"/home/connor/Projects/D-Lang/Vulkan/source/_examples/devices.d",
+		"/home/connor/Projects/D-Lang/Vulkan/dub.selections.json",
+		"/home/connor/Projects/D-Lang/Vulkan/.editorconfig",
+		"/home/connor/Projects/D-Lang/Getting Started/old/app.d",
+		"/home/connor/Projects/D-Lang/Getting Started/source/vg/core/Process.d",
+		"/home/connor/Projects/D-Lang/Getting Started/source/app.d",
+		"/home/connor/Projects/D-Lang/Getting Started/dub.json",
+		"/home/connor/Projects/D-Lang/Getting Started/bin/start",
+		"/home/connor/Projects/D-Lang/Getting Started/src/main.d",
+		"/home/connor/Projects/D-Lang/Getting Started/.editorconfig",
+		"/home/connor/Projects/Content Management System/.editorconfig",
+		"/home/connor/Projects/Electron/Cage/src/rats/engine/src/interaction/Engine.js",
+		"/home/connor/Projects/Electron/Cage/src/rats/engine/src/utils/Mouse.js",
+		"/home/connor/Projects/Electron/Cage/src/rats/engine/index.html",
+		"/home/connor/Projects/Electron/Cage/src/rats/engine/src/rendering/renderable/2d/Polygon.js",
+		"/home/connor/Projects/Electron/Cage/src/rats/engine/src/interaction/Source.js",
+		"/home/connor/Projects/Electron/Cage/src/rats/engine/src/utils/Timer.js",
+		"/home/connor/Projects/Electron/Cage/src/rats/engine/src/utils/Matrix.js",
+		"/home/connor/Projects/Electron/Cage/src/rats/engine/src/rendering/renderable/2d/Container.js",
+		"/home/connor/Projects/Electron/Cage/src/rats/engine/src/rendering/Target.js",
+		"/home/connor/Projects/Electron/Cage/src/rats/engine/src/rendering/Engine.js",
+		"/home/connor/Projects/Electron/Cage/src/rats/engine/src/rendering/renderable/Object.js",
+		"/home/connor/Projects/Electron/Cage/src/rats/engine/src/rendering/renderable/Container.js",
+		"/home/connor/Projects/Electron/Cage/src/rats/engine/impl/Game.js",
+		"/home/connor/Projects/Electron/Cage/src/rats/engine/src/rendering/shaders/Batch.js",
+		"/home/connor/Projects/Electron/Cage/src/rats/engine/src/rendering/shaders/Program.js",
+		"/home/connor/Projects/Electron/Cage/src/rats/engine/src/rendering/renderable/2d/Rectangle.js",
+		"/home/connor/Projects/Electron/Cage/src/rats/engine/src/rendering/renderable/3d/Container.js",
+		"/home/connor/Projects/Electron/Cage/src/rats/engine/src/rendering/shaders/impl/Base.js",
+		"/home/connor/Projects/Electron/Cage/src/rats/engine/main.js",
+		"/home/connor/Projects/Electron/Cage/src/rats/engine/src/rendering/GLTarget.js",
+		"/home/connor/Projects/Electron/Cage/src/rats/engine/src/rendering/shaders/BasicVertexShader.js",
+		"/home/connor/Projects/Electron/Cage/src/rats/engine/src/rendering/shaders/BasicVertixShader.js",
+		"/home/connor/Projects/Electron/Cage/src/rats/engine/src/rendering/shaders/BasicFragmentShader.js"
+	],
+	"find":
+	{
+		"height": 37.0
+	},
+	"find_in_files":
+	{
+		"height": 127.0,
+		"where_history":
+		[
+			"/home/connor/Projects/D-Lang/d-wtf/source",
+			"/home/connor/Projects/Electron/Cage/src/rats/engine",
+			"/home/connor/Projects/Electron/Cage/src/rats/engine/src",
+			"/home/connor/Projects/Vercas/Psychic Spork/resources/assets",
+			"/home/connor/Projects/Content Management System/public/assets/scripts",
+			"/home/connor/Projects/Content Management System/resources/assets/js",
+			"/home/connor/Projects/Blog/app",
+			"/home/connor/Projects/Proof of Concepts/Fantasy League: CSGO/vendor/laravel"
+		]
+	},
+	"find_state":
+	{
+		"case_sensitive": true,
+		"find_history":
+		[
+			"rotation",
+			"15f",
+			"1.0",
+			"-1",
+			" 1.0f",
+			"1.0f",
+			"0.0f",
+			"source",
+			"engine",
+			"component1",
+			"addGfxCmdText",
+			", 1.0f, 1.0f,",
+			"1.0f, 1.0f,",
+			"0.1",
+			"*",
+			"0.9",
+			"0.1",
+			"1.0f,\n    ",
+			" 1.0f,",
+			"vertex",
+			"this.vbo",
+			"position",
+			"1.0f",
+			"0.0f",
+			"GL_LINES",
+			"GL_TRIANGLES",
+			"fragColour",
+			"position",
+			"void",
+			"-",
+			"name",
+			"mat",
+			"\"",
+			"\\n\"",
+			"\\n",
+			"\"",
+			"(\"",
+			"\\n\"",
+			"                 \"",
+			"               \"",
+			"Handler",
+			"InputHandler",
+			"...",
+			"mods",
+			"GL_COLOR_BUFFER_BIT",
+			"Vulkan",
+			"instance",
+			"../../../",
+			"./lib/",
+			"'",
+			"\",",
+			"'",
+			"position",
+			"GLenum",
+			"GLint",
+			"GLuint",
+			"Camera",
+			"vbo",
+			"posAttrib",
+			"outColor",
+			"vbo",
+			"\"\n            ",
+			"\"",
+			"void",
+			"uint",
+			"windowWidth",
+			"width",
+			"x",
+			"this.",
+			"float",
+			"private",
+			"The",
+			"width",
+			"float",
+			"InputHandler",
+			"handlers",
+			"register",
+			"InputHandler",
+			"input handler",
+			"inputHandler",
+			"-",
+			"2d",
+			"void",
+			" }",
+			"== ",
+			" is null",
+			"is",
+			"Scene*",
+			"type == InputType.KEY && ",
+			"clear",
+			"GLFWwindow",
+			" Command",
+			"types",
+			" &&",
+			"GLFW_KEY_ESC",
+			"InputKeyCommand",
+			"bool",
+			"typeCommand",
+			"bool",
+			"uint",
+			"action",
+			"continue",
+			"action",
+			"key",
+			"char",
+			"key",
+			"InputType.",
+			"InputType.KEY,",
+			"=      ",
+			" =      ",
+			"      ",
+			"KeyCommand",
+			"InputCommand",
+			"0",
+			"null",
+			"InputFactory",
+			"std",
+			"onCharInputEvent",
+			"key",
+			"key, \" \", ",
+			"glfwSetKeyCallback",
+			"input",
+			"        ",
+			"scancode",
+			"Game",
+			"key",
+			"        ",
+			"Window"
+		],
+		"highlight": true,
+		"in_selection": false,
+		"preserve_case": true,
+		"regex": false,
+		"replace_history":
+		[
+			"const Variant[string] parameters, const string raw",
+			"lang-",
+			"tag",
+			"article",
+			"Tag",
+			"tag",
+			"article",
+			"comment",
+			"article",
+			"comments",
+			"article",
+			"comment",
+			"article",
+			"comment",
+			"article"
+		],
+		"reverse": false,
+		"show_context": true,
+		"use_buffer2": true,
+		"whole_word": false,
+		"wrap": true
+	},
+	"groups":
+	[
+		{
+			"sheets":
+			[
+			]
+		}
+	],
+	"incremental_find":
+	{
+		"height": 37.0
+	},
+	"input":
+	{
+		"height": 45.0
+	},
+	"layout":
+	{
+		"cells":
+		[
+			[
+				0,
+				0,
+				1,
+				1
+			]
+		],
+		"cols":
+		[
+			0.0,
+			1.0
+		],
+		"rows":
+		[
+			0.0,
+			1.0
+		]
+	},
+	"menu_visible": true,
+	"output.exec":
+	{
+		"height": 182.0
+	},
+	"output.find_results":
+	{
+		"height": 0.0
+	},
+	"output.unsaved_changes":
+	{
+		"height": 182.0
+	},
+	"pinned_build_system": "Packages/D/D.sublime-build",
+	"project": "fiiight.sublime-project",
+	"replace":
+	{
+		"height": 70.0
+	},
+	"save_all_on_build": true,
+	"select_file":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+			[
+				"input",
+				"src/utils/input/handling.d"
+			],
+			[
+				"jsonapi",
+				"vendor/league/fractal/src/Serializer/JsonApiSerializer.php"
+			],
+			[
+				"league/fractal/scope",
+				"vendor/league/fractal/src/Scope.php"
+			],
+			[
+				"fractmanager",
+				"vendor/league/fractal/src/Manager.php"
+			],
+			[
+				"league/fractal/resource/item",
+				"vendor/league/fractal/src/Resource/Item.php"
+			],
+			[
+				"fractalcollection",
+				"vendor/league/fractal/src/Resource/Collection.php"
+			],
+			[
+				"article.php",
+				"app/Models/Article.php"
+			],
+			[
+				"modelnotf",
+				"vendor/illuminate/database/Eloquent/ModelNotFoundException.php"
+			],
+			[
+				"model.php",
+				"vendor/illuminate/database/Eloquent/Model.php"
+			],
+			[
+				"routesrequests",
+				"vendor/laravel/lumen-framework/src/Concerns/RoutesRequests.php"
+			],
+			[
+				"laravel/lumen/application",
+				"vendor/laravel/lumen-framework/src/Application.php"
+			],
+			[
+				"user.php",
+				"vendor/illuminate/auth/GenericUser.php"
+			],
+			[
+				"resource",
+				"resources/assets/js/modules/resources.js"
+			],
+			[
+				"app.blade",
+				"resources/views/app.blade.php"
+			],
+			[
+				"hpp.js",
+				"highlight.js/lib/languages/cpp.js"
+			],
+			[
+				"package.json",
+				"package.json"
+			],
+			[
+				"app.scss",
+				"resources/assets/sass/app.scss"
+			],
+			[
+				"article.vue",
+				"resources/assets/js/components/article.vue"
+			],
+			[
+				"articles",
+				"app/Http/Api/Controllers/ArticlesController.php"
+			],
+			[
+				"routeservice",
+				"app/Providers/RouteServiceProvider.php"
+			],
+			[
+				"routes.php",
+				"app/Http/Api/routes.php"
+			],
+			[
+				"kernel",
+				"app/Http/Kernel.php"
+			],
+			[
+				"resources",
+				"resources/assets/js/modules/resources.js"
+			],
+			[
+				"illuminatepaginatoradapter",
+				"vendor/league/fractal/src/Pagination/IlluminatePaginatorAdapter.php"
+			],
+			[
+				"transformer",
+				"app/Models/Transformers/TagTransformer.php"
+			],
+			[
+				"illuminatecollection",
+				"vendor/laravel/framework/src/Illuminate/Support/Collection.php"
+			],
+			[
+				"app.ve",
+				"resources/assets/js/components/app.vue"
+			],
+			[
+				"base.js",
+				"resources/assets/js/modules/base.js"
+			],
+			[
+				"player.php",
+				"app/Models/Player.php"
+			],
+			[
+				"transformabst",
+				"vendor/league/fractal/src/TransformerAbstract.php"
+			],
+			[
+				"jsonserial",
+				"vendor/league/fractal/src/Serializer/JsonApiSerializer.php"
+			],
+			[
+				"resourceabst",
+				"vendor/league/fractal/src/Resource/ResourceAbstract.php"
+			],
+			[
+				"resourceabstract",
+				"vendor/league/fractal/src/Resource/ResourceAbstract.php"
+			],
+			[
+				"transformerabstract",
+				"vendor/league/fractal/src/TransformerAbstract.php"
+			],
+			[
+				"",
+				"app/Providers/FractalServiceProvider.php"
+			],
+			[
+				"fractal/collection",
+				"vendor/league/fractal/src/Resource/Collection.php"
+			],
+			[
+				"relation/beloto",
+				"vendor/laravel/framework/src/Illuminate/Database/Eloquent/Relations/BelongsTo.php"
+			],
+			[
+				"router.php",
+				"vendor/laravel/framework/src/Illuminate/Routing/Router.php"
+			],
+			[
+				"auth.",
+				"config/auth.php"
+			],
+			[
+				"sessionguard",
+				"vendor/laravel/framework/src/Illuminate/Auth/SessionGuard.php"
+			],
+			[
+				"tokenguard",
+				"vendor/laravel/framework/src/Illuminate/Auth/TokenGuard.php"
+			],
+			[
+				"authmanage",
+				"vendor/laravel/framework/src/Illuminate/Auth/AuthManager.php"
+			],
+			[
+				"createsuserproviders",
+				"vendor/laravel/framework/src/Illuminate/Auth/CreatesUserProviders.php"
+			],
+			[
+				"facadeauth",
+				"vendor/laravel/framework/src/Illuminate/Support/Facades/Auth.php"
+			],
+			[
+				"authservice",
+				"vendor/laravel/framework/src/Illuminate/Foundation/Support/Providers/AuthServiceProvider.php"
+			],
+			[
+				"guard.php",
+				"vendor/laravel/framework/src/Illuminate/Contracts/Auth/Guard.php"
+			],
+			[
+				"auth.php",
+				"config/auth.php"
+			],
+			[
+				"illuminaterequest.php",
+				"vendor/laravel/framework/src/Illuminate/Http/Request.php"
+			],
+			[
+				"fractalserializer",
+				"vendor/league/fractal/src/Serializer/JsonApiSerializer.php"
+			],
+			[
+				"league/fractal/serializer",
+				"vendor/league/fractal/src/Serializer/ArraySerializer.php"
+			],
+			[
+				"serializer",
+				"vendor/league/fractal/src/Serializer/SerializerAbstract.php"
+			],
+			[
+				"app.php",
+				"config/app.php"
+			],
+			[
+				"authenticatesusers",
+				"vendor/laravel/framework/src/Illuminate/Foundation/Auth/AuthenticatesUsers.php"
+			],
+			[
+				"authenticatesandregistersusers",
+				"vendor/laravel/framework/src/Illuminate/Foundation/Auth/AuthenticatesAndRegistersUsers.php"
+			]
+		],
+		"width": 0.0
+	},
+	"select_project":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"select_symbol":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"selected_group": 0,
+	"settings":
+	{
+	},
+	"show_minimap": true,
+	"show_open_files": false,
+	"show_tabs": true,
+	"side_bar_visible": true,
+	"side_bar_width": 198.0,
+	"status_bar_visible": true,
+	"template_settings":
+	{
+	}
+}

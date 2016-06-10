@@ -1,15 +1,21 @@
 module fiiight.scenes.menu;
 
 import common : Programs;
-import engine : Textures, Texture, Polygons, Polygon, RenderState = State, TexturedMatrixPolygon, PolygonData;
-import game : IScene;
+import engine : Textures, Polygons, RenderState = State;
+import engine : Shapes, Polygon, MatrixPolygon, TextMatrixPolygon, PolygonData, TextPolygonData;
+import game : IScene, UI;
 
 import std.parallelism : TaskPool;
 
 class MenuScene : IScene
 {
+    /**
+     * The current ui.
+     */
+    protected UI* ui;
+
     protected Polygon poly;
-    protected PolygonData* polyData;
+    protected PolygonData data;
 
     /**
      * Loads the scene.
@@ -21,23 +27,20 @@ class MenuScene : IScene
      */
     public void load(Programs* programs, Textures* textures, Polygons* polygons)
     {
-        Texture texture = Texture("resources/textures/test.png");
+        this.ui = UI.create();
+        this.ui.load(programs, textures, polygons);
 
-        this.poly = new TexturedMatrixPolygon([
-            0.25f, 0.25f,
-            0.75f, 0.25f,
-            0.75f, 0.75f,
-            0.25f, 0.75f,
-        ], [
-            0.25f, 0.25f,
-            0.75f, 0.25f,
-            0.75f, 0.75f,
-            0.25f, 0.75f,
-        ], &texture);
+        this.poly = new MatrixPolygon(Shapes.RECTANGLE);
 
         this.poly.load(programs);
 
-        this.polyData = PolygonData.create();
+        this.data = new PolygonData();
+
+        this.data.position.x = 0.5f;
+        this.data.position.y = 0.5f;
+
+        this.data.scale.x = 0.25f;
+        this.data.scale.y = 0.5f;
     }
 
     /**
@@ -45,7 +48,7 @@ class MenuScene : IScene
      */
     public void unload()
     {
-        // ...
+        this.ui.unload();
     }
 
     /**
@@ -57,7 +60,9 @@ class MenuScene : IScene
      */
     public void update(const float tick, TaskPool* taskPool)
     {
-        // update ui
+        this.ui.update(tick, taskPool);
+
+        //this.data.rotation += tick / 60f;
     }
 
     /**
@@ -68,6 +73,8 @@ class MenuScene : IScene
      */
     public void render(RenderState* renderState)
     {
-        renderState.render(this.poly, this.polyData);
+        this.ui.render(renderState);
+
+        renderState.render(this.poly, this.data);
     }
 }
