@@ -1,11 +1,11 @@
 module fiiight.state;
 
 import fiiight.scenes : MenuScene;
-import common : Programs, Program;
-import engine : InputFactory, RenderState = State, Textures, Polygons, Camera;
+import common : Programs, Program, DelegateCommand;
+import engine : InputFactory, InputHandler, RenderState = State, Textures, Polygons, Camera, Key;
 import game : IState, IScene;
 
-import std.parallelism : TaskPool, task;
+import std.parallelism : TaskPool;
 
 class State : IState
 {
@@ -44,8 +44,6 @@ class State : IState
      */
     protected IScene scene;
 
-    protected bool zoomIn = true;
-
     /**
      * Load the state.
      */
@@ -74,7 +72,7 @@ class State : IState
         this.polygons = Polygons.create();
 
         this.scene = new MenuScene();
-        this.scene.load(this.programs, this.textures, this.polygons);
+        this.scene.load(this.programs, this.textures, this.polygons, this.inputFactory);
     }
 
     /**
@@ -82,7 +80,8 @@ class State : IState
      */
     void unload()
     {
-        this.scene.unload();
+        this.scene.unload(this.programs, this.textures, this.polygons, this.inputFactory);
+        this.scene = null;
 
         //this.programs.clear();
         this.polygons.clear();
@@ -101,11 +100,11 @@ class State : IState
      */
     public void update(const float tick, TaskPool* taskPool)
     {
+        this.camera.update(tick, taskPool);
+
         if (! this.scene) {
             return;
         }
-
-        taskPool.put(task(&this.animateCamera, tick));
 
         this.scene.update(tick, taskPool);
     }
@@ -115,33 +114,12 @@ class State : IState
      */
     public void render()
     {
-        if (! this.scene) {
-            return;
-        }
-
         this.renderState.clear();
-        this.scene.render(this.renderState);
-        this.renderState.render(this.camera);
-    }
 
-    void animateCamera(const float tick)
-    {
-        this.camera.rotation += tick / 60f;
-
-        if (this.zoomIn) {
-            this.camera.zoom += tick / 60f;
-
-            if (this.camera.zoom >= 2f) {
-                this.camera.zoom = 2f;
-                this.zoomIn = false;
-            }
-        } else {
-            this.camera.zoom -= tick / 60f;
-
-            if (this.camera.zoom <= 0f) {
-                this.camera.zoom = 0f;
-                this.zoomIn = true;
-            }
+        if (this.scene) {
+            this.scene.render(this.renderState);
         }
+
+        this.renderState.render(this.camera);
     }
 }

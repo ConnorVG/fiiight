@@ -58,7 +58,7 @@ struct Camera
      *      tick      =     the tick amount
      *      taskPool  =     the available task pool
      */
-    void update(const float tick, TaskPool* taskPool)
+    public void update(const float tick, TaskPool* taskPool)
     {
         // handle camera effects
         // ...

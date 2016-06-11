@@ -5,7 +5,7 @@ interface ICommand
     // ...
 }
 
-class DelegateCommand
+class DelegateCommand : ICommand
 {
     /**
      * The command handler;

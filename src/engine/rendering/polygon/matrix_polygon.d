@@ -91,7 +91,7 @@ class MatrixPolygon : Polygon
     {
         glUseProgram(this.program.id);
 
-        glUniformMatrix4fv(this.unifView, 1, GL_TRUE, camera.matrix.value_ptr);
+        camera.apply(this.unifView);
 
         foreach (ref data; datas) {
             glUniform4f(this.unifColour, data.colour.r, data.colour.g, data.colour.b, data.colour.a);

@@ -123,7 +123,7 @@ struct Game
             elapsedTotal = elapsed.total!"msecs";
 
             renderDelay += elapsedTotal;
-            if (renderDelay >= 0) {
+            if (renderDelay >= -1) {
                 glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
                 state.render();
                 glfwSwapBuffers(window);
@@ -137,7 +137,7 @@ struct Game
             }
 
             int delay = updateDelay < renderDelay ? renderDelay : updateDelay;
-            if (delay < 0) {
+            if (elapsedTotal <= 1 || delay < -1) {
                 Thread.sleep(dur!"msecs"(delay * -1));
             }
 

@@ -1,8 +1,7 @@
 module fiiight.scenes.menu;
 
-import common : Programs;
-import engine : Textures, Polygons, RenderState = State;
-import engine : Shapes, Polygon, MatrixPolygon, TextMatrixPolygon, PolygonData, TextPolygonData;
+import common : Programs, DelegateCommand;
+import engine : Textures, Polygons, RenderState = State, InputFactory, InputHandler, Key, CharInputCommand;
 import game : IScene, UI;
 
 import std.parallelism : TaskPool;
@@ -14,9 +13,10 @@ class MenuScene : IScene
      */
     protected UI* ui;
 
-    protected Polygon poly;
-    protected PolygonData[] data;
-    protected uint selected = 0;
+    /**
+     * The input handler.
+     */
+    protected InputHandler* inputHandler;
 
     /**
      * Loads the scene.
@@ -26,40 +26,22 @@ class MenuScene : IScene
      *      textures  =     the texture collection
      *      polygons  =     the polygon collection
      */
-    public void load(Programs* programs, Textures* textures, Polygons* polygons)
+    public void load(Programs* programs, Textures* textures, Polygons* polygons, InputFactory* inputFactory)
     {
         this.ui = UI.create();
         this.ui.load(programs, textures, polygons);
 
-        this.poly = new MatrixPolygon(Shapes.RECTANGLE);
-
-        this.poly.load(programs);
-
-        for (int i = 0; i < 4; i++) {
-            PolygonData _data = new PolygonData();
-
-            if (i == this.selected) {
-                _data.colour.r = 0.7f;
-                _data.colour.g = 0.25f;
-                _data.colour.b = 0.25f;
-            }
-
-            _data.position.x = 0.25f;
-            _data.position.y = 0.2f * i + 0.2f;
-
-            _data.scale.x = 0.25f;
-            _data.scale.y = 0.1f;
-
-            this.data ~= _data;
-        }
+        this.bind(inputFactory);
     }
 
     /**
      * Unloads the scene.
      */
-    public void unload()
+    public void unload(Programs* programs, Textures* textures, Polygons* polygons, InputFactory* inputFactory)
     {
-        this.ui.unload();
+        this.unbind(inputFactory);
+
+        this.ui.unload(programs, textures, polygons);
     }
 
     /**
@@ -72,11 +54,6 @@ class MenuScene : IScene
     public void update(const float tick, TaskPool* taskPool)
     {
         this.ui.update(tick, taskPool);
-
-        this.data[0].rotation += tick / 15f;
-        this.data[1].rotation += tick / 30f;
-        this.data[2].rotation += tick / 60f;
-        this.data[3].rotation += tick / 120f;
     }
 
     /**
@@ -88,22 +65,49 @@ class MenuScene : IScene
     public void render(RenderState* renderState)
     {
         this.ui.render(renderState);
-
-        foreach (ref _data; this.data) {
-            renderState.render(this.poly, _data);
-        }
     }
 
-    public void next()
+    /**
+     * Bind UI inputs.
+     *
+     * Params:
+     *      inputFactory  =     the input factory
+     */
+    protected void bind(InputFactory* inputFactory)
     {
-        this.data[this.selected].colour.r = 1.0f;
-        this.data[this.selected].colour.g = 1.0f;
-        this.data[this.selected].colour.b = 1.0f;
+        this.inputHandler = InputHandler.create();
 
-        this.selected = (this.selected + 1) % this.data.length;
+        this.inputHandler.register(new DelegateCommand(&this.ui.next), Key.DOWN);
+        this.inputHandler.register(new DelegateCommand(&this.ui.previous), Key.UP);
 
-        this.data[this.selected].colour.r = 0.7f;
-        this.data[this.selected].colour.g = 0.25f;
-        this.data[this.selected].colour.b = 0.25f;
+        this.inputHandler.register(new DelegateCommand(&this.ui.select), Key.ENTER);
+        this.inputHandler.register(new DelegateCommand(&this.ui.deselect), Key.ESCAPE);
+
+        this.inputHandler.register(new DelegateCommand(&this.ui.increase), Key.RIGHT);
+        this.inputHandler.register(new DelegateCommand(&this.ui.decrease), Key.LEFT);
+
+        this.inputHandler.register(new CharInputCommand(&this.ui.character));
+
+         this.inputHandler.register(new DelegateCommand(&this.ui.clear!(1)), Key.BACKSPACE);
+        this.inputHandler.register(new DelegateCommand(&this.ui.clear), Key.DELETE);
+
+        this.inputHandler.activate();
+        inputFactory.register(this.inputHandler);
+    }
+
+    /**
+     * Unbind UI inputs.
+     *
+     * Params:
+     *      inputFactory  =     the input factory
+     */
+    protected void unbind(InputFactory* inputFactory)
+    {
+        this.inputHandler.deactivate();
+        this.inputHandler.clear();
+
+        inputFactory.unregister(this.inputHandler);
+
+        delete this.inputHandler;
     }
 }

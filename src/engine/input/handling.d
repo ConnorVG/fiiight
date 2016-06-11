@@ -19,12 +19,12 @@ struct InputHandler
     /**
      * The mouse command bindings.
      */
-    protected ICommand[int] mouseCommands;
+    protected ICommand[][int] mouseCommands;
 
     /**
      * The key command bindings.
      */
-    protected ICommand[int] keyCommands;
+    protected ICommand[][int] keyCommands;
 
     /**
      * The char command bindings.
@@ -55,7 +55,11 @@ struct InputHandler
      */
     public void register(ICommand command, MouseButton button)
     {
-        this.mouseCommands[button] = command;
+        if (button !in this.mouseCommands) {
+            this.mouseCommands[button] = [];
+        }
+
+        this.mouseCommands[button] ~= command;
     }
 
     /**
@@ -67,7 +71,11 @@ struct InputHandler
      */
     public void register(ICommand command, Key key)
     {
-        this.keyCommands[key] = command;
+        if (key !in this.keyCommands) {
+            this.keyCommands[key] = [];
+        }
+
+        this.keyCommands[key] ~= command;
     }
 
     /**
@@ -90,7 +98,11 @@ struct InputHandler
      */
     public void unregister(ICommand command, MouseButton button)
     {
-        this.mouseCommands.remove(button);
+        if (button !in this.mouseCommands) {
+            return;
+        }
+
+        this.mouseCommands[button].remove!(val => val == command);
     }
 
     /**
@@ -102,7 +114,11 @@ struct InputHandler
      */
     public void unregister(ICommand command, Key key)
     {
-        this.keyCommands.remove(key);
+        if (key !in this.keyCommands) {
+            return;
+        }
+
+        this.keyCommands[key].remove!(val => val == command);
     }
 
     /**
@@ -126,9 +142,19 @@ struct InputHandler
      */
     public void fire(MouseButton button, Action action, Modifier modifier)
     {
-        foreach (ref command; parallel(this.mouseCommands.byValue())) {
+        if (button !in this.mouseCommands) {
+            return;
+        }
+
+        ICommand[] commands = this.mouseCommands[button];
+
+        foreach (ref command; parallel(commands)) {
             if (auto mouseCommand = cast(MouseInputCommand) command) {
                 mouseCommand.execute(button, action, modifier);
+            }
+
+            if (action == Action.RELEASE) {
+                continue;
             }
 
             if (auto delegateCommand = cast(DelegateCommand) command) {
@@ -147,9 +173,19 @@ struct InputHandler
      */
     public void fire(Key key, Action action, Modifier modifier)
     {
-        foreach (ref command; parallel(this.keyCommands.byValue())) {
+        if (key !in this.keyCommands) {
+            return;
+        }
+
+        ICommand[] commands = this.keyCommands[key];
+
+        foreach (ref command; parallel(commands)) {
             if (auto keyCommand = cast(KeyInputCommand) command) {
                 keyCommand.execute(key, action, modifier);
+            }
+
+            if (action == Action.RELEASE) {
+                continue;
             }
 
             if (auto delegateCommand = cast(DelegateCommand) command) {

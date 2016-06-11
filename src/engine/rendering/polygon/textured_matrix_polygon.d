@@ -100,7 +100,7 @@ class TexturedMatrixPolygon : MatrixPolygon
     {
         glUseProgram(this.program.id);
 
-        glUniformMatrix4fv(this.unifView, 1, GL_TRUE, camera.matrix.value_ptr);
+        camera.apply(this.unifView);
 
         glBindTexture(GL_TEXTURE_2D, this.texture.id);
         glActiveTexture(GL_TEXTURE0);
