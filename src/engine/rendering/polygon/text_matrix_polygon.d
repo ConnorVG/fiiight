@@ -162,16 +162,27 @@ class TextMatrixPolygon : MatrixPolygon
 
     /**
      * Bind the VBOs for characters.
+     *
+     * Todo: make this not have to occur every time...
      */
     protected void bindCharacters(string text)
     {
         auto characters = this.font.characters;
+        auto lineHeight = this.font.lineHeight;
+        auto scale = this.font.scale;
 
         this.vertices = [];
         this.textureCoordinates = [];
         float cursor = 0f;
-        float scale = this.font.scale;
+        ubyte line = 0;
         foreach (ref index, ref character; text) {
+            if (character == '\n') {
+                cursor = 0f;
+                line++;
+
+                continue;
+            }
+
             if (character !in characters) {
                 continue;
             }
@@ -179,13 +190,13 @@ class TextMatrixPolygon : MatrixPolygon
             auto def = characters[character];
 
             this.vertices ~= [
-                cursor + def.xOffset, def.yOffset,
-                cursor + def.xOffset, def.renderHeight + def.yOffset,
-                cursor + def.xOffset + def.renderWidth, def.renderHeight + def.yOffset,
+                cursor + def.xOffset, def.yOffset + (line * lineHeight),
+                cursor + def.xOffset, def.renderHeight + def.yOffset + (line * lineHeight),
+                cursor + def.xOffset + def.renderWidth, def.renderHeight + def.yOffset + (line * lineHeight),
 
-                cursor + def.xOffset, def.yOffset,
-                cursor + def.xOffset + def.renderWidth, def.yOffset,
-                cursor + def.xOffset + def.renderWidth, def.renderHeight + def.yOffset,
+                cursor + def.xOffset, def.yOffset + (line * lineHeight),
+                cursor + def.xOffset + def.renderWidth, def.yOffset + (line * lineHeight),
+                cursor + def.xOffset + def.renderWidth, def.renderHeight + def.yOffset + (line * lineHeight),
             ];
 
             this.textureCoordinates ~= [

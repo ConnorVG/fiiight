@@ -90,9 +90,13 @@ struct Game
     {
         this.running = true;
 
-        float updateRateBase = 1000f / 30f;
-        float updateRate = 1000f / this.settings.updateRate;
-        float renderRate = 1000f / this.settings.renderRate;
+        float updateRateBase = 1000000f / 30f;
+        float updateRate = 1000000f / this.settings.updateRate;
+        float renderRate = 1000000f / this.settings.renderRate;
+
+        if (this.settings.renderRate == ubyte.max) {
+            renderRate = 0;
+        }
 
         int updateDelay = 0;
         int renderDelay = 0;
@@ -107,7 +111,8 @@ struct Game
         while (this.running && ! this.engine.isClosed()) {
             now = MonoTime.currTime;
             elapsed = now - updateBefore;
-            elapsedTotal = elapsed.total!"msecs";
+            elapsedTotal = elapsed.total!"usecs";
+            updateBefore = now;
 
             TaskPool taskPool;
 
@@ -125,15 +130,15 @@ struct Game
                 state.update(updateTick, &taskPool);
 
                 updateDelay = cast(int) -updateRate;
-                updateBefore = now;
             }
 
             now = MonoTime.currTime;
             elapsed = now - renderBefore;
-            elapsedTotal = elapsed.total!"msecs";
+            elapsedTotal = elapsed.total!"usecs";
+            renderBefore = now;
 
             renderDelay += elapsedTotal;
-            if (renderDelay >= -1) {
+            if (renderDelay >= 0) {
                 glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
                 glEnable(GL_BLEND);
@@ -148,7 +153,6 @@ struct Game
                 glfwSwapBuffers(window);
 
                 renderDelay = cast(int) -renderRate;
-                renderBefore = now;
             }
 
             // Not sure if this should just be in the update block or not, honestly.
@@ -157,8 +161,8 @@ struct Game
             }
 
             int delay = updateDelay < renderDelay ? renderDelay : updateDelay;
-            if (delay < -2) {
-                Thread.sleep(dur!"msecs"(delay * -1 - 1));
+            if (delay < 0) {
+                Thread.sleep(dur!"usecs"(delay * -1));
             }
         }
 

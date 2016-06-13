@@ -36,22 +36,23 @@ class State : IState
     /**
      * The fps polygon.
      */
-    protected TextMatrixPolygon fpsPolygon;
+    protected TextMatrixPolygon textPolygon;
 
     /**
-     * The fps data.
+     * The fps/tps data.
      */
-    protected TextPolygonData fpsData;
-
-    /**
-     * Debug shizzle.
-     */
-    protected TextPolygonData fpsChildData;
+    protected TextPolygonData psData;
 
     /**
      * Recorded frame times.
      */
     protected ulong[] frames;
+
+
+    /**
+     * Recorded tick times.
+     */
+    protected ulong[] ticks;
 
     /**
      * Load the state.
@@ -83,26 +84,16 @@ class State : IState
         this.scene = new MenuScene();
         this.scene.load(this.stateCollections);
 
-        this.fpsPolygon = new TextMatrixPolygon(TextMatrixPolygonFonts.DEFAULT);
-        this.fpsPolygon.load(this.stateCollections.programs, this.stateCollections.textures);
+        this.textPolygon = new TextMatrixPolygon(TextMatrixPolygonFonts.DEFAULT);
+        this.textPolygon.load(this.stateCollections.programs, this.stateCollections.textures);
 
-        this.fpsData = new TextPolygonData("0 fps");
+        this.psData = new TextPolygonData("[0 fps]");
 
-        this.fpsData.position.x = 0.015f;
-        this.fpsData.position.y = 0.01f;
+        this.psData.position.x = 0.01f;
+        this.psData.position.y = 0.01f;
 
-        this.fpsData.scale.x = 0.03f;
-        this.fpsData.scale.y = 0.03f;
-
-        this.fpsChildData = new TextPolygonData("this should be anchored around the fps counter! :-(");
-
-        this.fpsChildData.position.x = 1f;
-        this.fpsChildData.position.y = 0.01f;
-
-        this.fpsChildData.scale.x = 0.6f;
-        this.fpsChildData.scale.y = 0.6f;
-
-        this.fpsChildData.parent = this.fpsData;
+        this.psData.scale.x = 0.0125f;
+        this.psData.scale.y = 0.03f;
     }
 
     /**
@@ -125,6 +116,11 @@ class State : IState
      */
     public void update(const float tick, TaskPool* taskPool)
     {
+        ulong now = MonoTime.currTime.ticks;
+
+        this.ticks ~= now;
+        this.ticks = this.ticks.remove!(time => time + MonoTime.ticksPerSecond < now);
+
         this.camera.update(tick, taskPool);
 
         if (! this.scene) {
@@ -132,11 +128,6 @@ class State : IState
         }
 
         this.scene.update(tick, taskPool);
-
-        this.fpsData.position.x += tick / 6000f;
-        this.fpsData.position.y += tick / 6000f;
-        this.fpsData.rotation += tick / 600f;
-        this.fpsChildData.rotation = -this.fpsData.rotation;
     }
 
     /**
@@ -149,20 +140,20 @@ class State : IState
         this.frames ~= now;
         this.frames = this.frames.remove!(time => time + MonoTime.ticksPerSecond < now);
 
-        this.fpsData.text = "%d fps".format(this.frames.length);
+        this.psData.text = "[%d fps]\n[%d tps]".format(this.frames.length, this.ticks.length);
 
-        if (this.frames.length <= 30) {
-            this.fpsData.colour.r = 1.0f;
-            this.fpsData.colour.g = 0.3f;
-            this.fpsData.colour.b = 0.3f;
-        } else if (this.frames.length <= 50) {
-            this.fpsData.colour.r = 1.0f;
-            this.fpsData.colour.g = 1.0f;
-            this.fpsData.colour.b = 0.6f;
+        if (this.frames.length <= 30 || this.ticks.length < 15) {
+            this.psData.colour.r = 1.0f;
+            this.psData.colour.g = 0.3f;
+            this.psData.colour.b = 0.3f;
+        } else if (this.frames.length <= 50 || this.ticks.length < 25) {
+            this.psData.colour.r = 1.0f;
+            this.psData.colour.g = 1.0f;
+            this.psData.colour.b = 0.6f;
         } else {
-            this.fpsData.colour.r = 0.6f;
-            this.fpsData.colour.g = 1.0f;
-            this.fpsData.colour.b = 0.6f;
+            this.psData.colour.r = 0.6f;
+            this.psData.colour.g = 1.0f;
+            this.psData.colour.b = 0.6f;
         }
 
         this.renderState.clear();
@@ -171,8 +162,7 @@ class State : IState
             this.scene.render(this.renderState);
         }
 
-        this.renderState.render(this.fpsPolygon, this.fpsData);
-        this.renderState.render(this.fpsPolygon, this.fpsChildData);
+        this.renderState.render(this.textPolygon, this.psData);
 
         this.renderState.render(this.camera);
     }

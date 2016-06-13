@@ -1,5 +1,5 @@
 info face="Source Code Pro" size=64 bold=0 italic=0 charset="" unicode=0 stretchH=100 smooth=1 aa=1 padding=1,1,1,1 spacing=-2,-2
-common lineHeight=81 base=63 scaleW=256 scaleH=512 pages=1 packed=0
+common lineHeight=64 base=63 scaleW=256 scaleH=512 pages=1 packed=0
 page id=0 file="test"
 chars count=96
 char id=10    x=0    y=0    width=0    height=0    xoffset=0    yoffset=0    xadvance=0    page=0    chnl=0

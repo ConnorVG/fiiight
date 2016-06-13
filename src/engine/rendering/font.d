@@ -59,6 +59,8 @@ struct BitmapFont
 
             this.characters[character] = _character;
         }
+
+        this.lineHeight = this.scale * this.lineHeight / 64f;
     }
 }
 
@@ -89,7 +91,7 @@ struct BitmapFonts
         ushort size = 0;
         bool bold = false;
         bool italic = false;
-        ushort lineHeight = 0;
+        float lineHeight = 0;
         ushort base = 0;
 
         ushort scaleW = 0;
@@ -128,7 +130,7 @@ struct BitmapFonts
 
                         break;
                     case "lineHeight":
-                        lineHeight = to!ushort(value);
+                        lineHeight = to!float(value);
 
                         break;
                     case "base":
