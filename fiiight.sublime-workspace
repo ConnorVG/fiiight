@@ -4,6 +4,26 @@
 		"selected_items":
 		[
 			[
+				"input",
+				"inputHandler"
+			],
+			[
+				"inputH",
+				"InputHandler"
+			],
+			[
+				"Input",
+				"InputHandler"
+			],
+			[
+				"zoom",
+				"zoomIn"
+			],
+			[
+				"Polygon",
+				"PolygonData"
+			],
+			[
 				"frag",
 				"fragmentShaderContent"
 			],
@@ -22,10 +42,6 @@
 			[
 				"gl",
 				"glfwGetFramebufferSize"
-			],
-			[
-				"input",
-				"inputHandler"
 			],
 			[
 				"inu",
@@ -337,26 +353,39 @@
 	},
 	"expanded_folders":
 	[
+		"/home/connor/Projects/D-Lang/fiiight/src/common",
+		"/home/connor/Projects/D-Lang/fiiight/src/common/commands",
 		"/home/connor/Projects/D-Lang/fiiight/src/engine",
+		"/home/connor/Projects/D-Lang/fiiight/src/engine/input",
 		"/home/connor/Projects/D-Lang/fiiight/src/engine/rendering",
 		"/home/connor/Projects/D-Lang/fiiight/src/engine/rendering/polygon",
 		"/home/connor/Projects/D-Lang/fiiight/src/engine/rendering/polygon/data",
+		"/home/connor/Projects/D-Lang/fiiight/src/game",
+		"/home/connor/Projects/D-Lang/fiiight/src/game/ui",
 		"/home/connor/Projects/D-Lang/fiiight/src/fiiight",
-		"/home/connor/Projects/D-Lang/fiiight/src/fiiight/scenes",
-		"/home/connor/Projects/D-Lang/fiiight/resources",
-		"/home/connor/Projects/D-Lang/fiiight/resources/shaders"
+		"/home/connor/Projects/D-Lang/fiiight/src/fiiight/scenes"
 	],
 	"file_history":
 	[
-		"/home/connor/Projects/D-Lang/fiiight/src/engine/rendering/polygon/text_matrix_polygon.d",
+		"/home/connor/Projects/D-Lang/fiiight/src/game/ui/ui.d",
+		"/home/connor/Projects/D-Lang/fiiight/src/game/game.d",
+		"/home/connor/Projects/D-Lang/fiiight/src/fiiight/state.d",
 		"/home/connor/Projects/D-Lang/fiiight/src/fiiight/scenes/menu.d",
-		"/home/connor/Projects/D-Lang/fiiight/src/engine/rendering/polygon/data/data.d",
 		"/home/connor/Projects/D-Lang/fiiight/src/engine/rendering/camera.d",
+		"/home/connor/Projects/D-Lang/fiiight/src/game/scene.d",
+		"/home/connor/Projects/D-Lang/fiiight/src/common/commands/command.d",
+		"/home/connor/Projects/D-Lang/fiiight/src/engine/input/handling.d",
+		"/home/connor/Projects/D-Lang/fiiight/src/engine/input/package.d",
+		"/home/connor/Projects/D-Lang/fiiight/src/engine/rendering/polygon/data/data.d",
+		"/home/connor/Projects/D-Lang/fiiight/src/engine/rendering/polygon/matrix_polygon.d",
+		"/home/connor/Projects/D-Lang/fiiight/src/engine/rendering/polygon/textured_matrix_polygon.d",
+		"/home/connor/Projects/D-Lang/fiiight/src/game/ui/tree.d",
+		"/home/connor/Projects/D-Lang/fiiight/src/game/ui/package.d",
+		"/home/connor/Projects/D-Lang/fiiight/src/engine/rendering/polygon/text_matrix_polygon.d",
 		"/home/connor/Projects/D-Lang/fiiight/src/engine/rendering/polygon/polygon.d",
 		"/home/connor/Projects/D-Lang/fiiight/src/engine/rendering/polygon/data/text_data.d",
 		"/home/connor/Projects/D-Lang/fiiight/resources/shaders/vertex/colour-matrix.glsl",
 		"/home/connor/Projects/D-Lang/fiiight/resources/shaders/vertex/texture-matrix.glsl",
-		"/home/connor/Projects/D-Lang/fiiight/src/engine/rendering/polygon/matrix_polygon.d",
 		"/home/connor/Projects/D-Lang/fiiight/.dub/old_src/utils/gl.d",
 		"/home/connor/Projects/D-Lang/fiiight/.dub/resources/shaders/vertex/2d-basic-position-colour.glsl",
 		"/home/connor/Projects/D-Lang/fiiight/.dub/resources/shaders/fragment/basic-colour.glsl",
@@ -465,21 +494,11 @@
 		"/home/connor/Projects/Electron/Cage/src/rats/engine/src/rendering/Engine.js",
 		"/home/connor/Projects/Electron/Cage/src/rats/engine/src/rendering/renderable/Object.js",
 		"/home/connor/Projects/Electron/Cage/src/rats/engine/src/rendering/renderable/Container.js",
-		"/home/connor/Projects/Electron/Cage/src/rats/engine/impl/Game.js",
-		"/home/connor/Projects/Electron/Cage/src/rats/engine/src/rendering/shaders/Batch.js",
-		"/home/connor/Projects/Electron/Cage/src/rats/engine/src/rendering/shaders/Program.js",
-		"/home/connor/Projects/Electron/Cage/src/rats/engine/src/rendering/renderable/2d/Rectangle.js",
-		"/home/connor/Projects/Electron/Cage/src/rats/engine/src/rendering/renderable/3d/Container.js",
-		"/home/connor/Projects/Electron/Cage/src/rats/engine/src/rendering/shaders/impl/Base.js",
-		"/home/connor/Projects/Electron/Cage/src/rats/engine/main.js",
-		"/home/connor/Projects/Electron/Cage/src/rats/engine/src/rendering/GLTarget.js",
-		"/home/connor/Projects/Electron/Cage/src/rats/engine/src/rendering/shaders/BasicVertexShader.js",
-		"/home/connor/Projects/Electron/Cage/src/rats/engine/src/rendering/shaders/BasicVertixShader.js",
-		"/home/connor/Projects/Electron/Cage/src/rats/engine/src/rendering/shaders/BasicFragmentShader.js"
+		"/home/connor/Projects/Electron/Cage/src/rats/engine/impl/Game.js"
 	],
 	"find":
 	{
-		"height": 37.0
+		"height": 45.0
 	},
 	"find_in_files":
 	{
@@ -501,6 +520,30 @@
 		"case_sensitive": true,
 		"find_history":
 		[
+			"zoom",
+			"writeln",
+			"/**",
+			"previous",
+			"UP",
+			"scene",
+			"GenericCommand",
+			"bind",
+			"increase",
+			"(this.selected) % cast(int) this.data.length",
+			"this.data.length",
+			"+",
+			"cast(int) (",
+			"key",
+			"action",
+			"     the ",
+			"     ",
+			"InputHandler",
+			"2f",
+			"right",
+			"rotateCamera",
+			"run",
+			"the",
+			": ",
 			"rotation",
 			"15f",
 			"1.0",
@@ -604,31 +647,7 @@
 			"action",
 			"continue",
 			"action",
-			"key",
-			"char",
-			"key",
-			"InputType.",
-			"InputType.KEY,",
-			"=      ",
-			" =      ",
-			"      ",
-			"KeyCommand",
-			"InputCommand",
-			"0",
-			"null",
-			"InputFactory",
-			"std",
-			"onCharInputEvent",
-			"key",
-			"key, \" \", ",
-			"glfwSetKeyCallback",
-			"input",
-			"        ",
-			"scancode",
-			"Game",
-			"key",
-			"        ",
-			"Window"
+			"key"
 		],
 		"highlight": true,
 		"in_selection": false,
@@ -722,6 +741,26 @@
 		"last_filter": "",
 		"selected_items":
 		[
+			[
+				"camera",
+				"engine/rendering/camera.d"
+			],
+			[
+				"input/han",
+				"engine/input/handling.d"
+			],
+			[
+				"inputhan",
+				"engine/input/handling.d"
+			],
+			[
+				"input.d",
+				"engine/input/package.d"
+			],
+			[
+				"pol/data",
+				"engine/rendering/polygon/data/data.d"
+			],
 			[
 				"input",
 				"src/utils/input/handling.d"

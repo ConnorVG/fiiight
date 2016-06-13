@@ -13,7 +13,7 @@ out vec4 fragColour;
 out vec2 fragTexture;
 
 void main() {
-    fragTexture = vec2((texture.x - 0.5) * 2.0, (texture.y - 0.5) * -2.0);
+    fragTexture = vec2(texture.x, texture.y);
     fragColour = colour;
-    gl_Position = view * model * vec4(position, 0.0, 1.0);
+    gl_Position = view * model * vec4(position.x * 2.0 - 1.0, position.y * -2.0 + 1.0, 0.0, 1.0);
 }

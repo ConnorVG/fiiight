@@ -13,13 +13,41 @@ struct State
     protected PolygonData[][Polygon] groups;
 
     /**
+     * The width.
+     *
+     * Todo: make this actually real...
+     */
+    public ushort width;
+
+    /**
+     * The height.
+     *
+     * Todo: make this actually real...
+     */
+    public ushort height;
+
+    /**
+     * The width:height ratio.
+     *
+     * Todo: make this actually real...
+     */
+    public real ratio;
+
+    /**
      * Creates an instance of state.
      *
      * Returns: a pointer to the state instance
      */
     public static State* create()
     {
-        return cast(State*) GC.calloc(State.sizeof);
+        State* state = cast(State*) GC.calloc(State.sizeof);
+
+        // Todo: read the properties
+        state.width = 1080;
+        state.height = 608;
+        state.ratio = 1080. / 608.;
+
+        return state;
     }
 
     /**
@@ -42,7 +70,7 @@ struct State
      */
     public void render(Camera* camera)
     {
-        foreach (ref polygon, ref data; this.groups) {
+        foreach (Polygon polygon, PolygonData[] data; this.groups) {
             polygon.bind();
             polygon.render(camera, data);
             polygon.unbind();

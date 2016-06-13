@@ -1,8 +1,8 @@
 module fiiight.scenes.menu;
 
-import common : Programs, DelegateCommand;
-import engine : Textures, Polygons, RenderState = State, InputFactory, InputHandler, Key, CharInputCommand;
-import game : IScene, UI;
+import common : DelegateCommand;
+import engine : RenderState = State, InputFactory, InputHandler, Key, CharInputCommand;
+import game : StateCollections, IScene, UI;
 
 import std.parallelism : TaskPool;
 
@@ -22,26 +22,28 @@ class MenuScene : IScene
      * Loads the scene.
      *
      * Params:
-     *      programs  =     the program collection
-     *      textures  =     the texture collection
-     *      polygons  =     the polygon collection
+     *      stateCollections  =     the state collections
      */
-    public void load(Programs* programs, Textures* textures, Polygons* polygons, InputFactory* inputFactory)
+    public void load(StateCollections* stateCollections)
     {
         this.ui = UI.create();
-        this.ui.load(programs, textures, polygons);
 
-        this.bind(inputFactory);
+        this.ui.load(stateCollections);
+
+        this.bind(stateCollections.inputFactory);
     }
 
     /**
      * Unloads the scene.
+     *
+     * Params:
+     *      stateCollections  =     the state collections
      */
-    public void unload(Programs* programs, Textures* textures, Polygons* polygons, InputFactory* inputFactory)
+    public void unload(StateCollections* stateCollections)
     {
-        this.unbind(inputFactory);
+        this.unbind(stateCollections.inputFactory);
 
-        this.ui.unload(programs, textures, polygons);
+        this.ui.unload(stateCollections);
     }
 
     /**
@@ -53,6 +55,8 @@ class MenuScene : IScene
      */
     public void update(const float tick, TaskPool* taskPool)
     {
+        // if we have a background scene, update that? idk
+
         this.ui.update(tick, taskPool);
     }
 
@@ -64,6 +68,8 @@ class MenuScene : IScene
      */
     public void render(RenderState* renderState)
     {
+        // if we have a background scene, render that
+
         this.ui.render(renderState);
     }
 
@@ -76,6 +82,7 @@ class MenuScene : IScene
     protected void bind(InputFactory* inputFactory)
     {
         this.inputHandler = InputHandler.create();
+        this.inputHandler.activate();
 
         this.inputHandler.register(new DelegateCommand(&this.ui.next), Key.DOWN);
         this.inputHandler.register(new DelegateCommand(&this.ui.previous), Key.UP);
@@ -88,10 +95,9 @@ class MenuScene : IScene
 
         this.inputHandler.register(new CharInputCommand(&this.ui.character));
 
-         this.inputHandler.register(new DelegateCommand(&this.ui.clear!(1)), Key.BACKSPACE);
+        this.inputHandler.register(new DelegateCommand(&this.ui.clear!1), Key.BACKSPACE);
         this.inputHandler.register(new DelegateCommand(&this.ui.clear), Key.DELETE);
 
-        this.inputHandler.activate();
         inputFactory.register(this.inputHandler);
     }
 

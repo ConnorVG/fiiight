@@ -38,7 +38,7 @@ class TexturedMatrixPolygon : MatrixPolygon
      *      textureCoordinates  =     the texture coordinates
      *      texture             =     the texture
      */
-    public this(const float[] vertices, const float[] textureCoordinates, Texture* texture)
+    public this(float[] vertices, const float[] textureCoordinates, Texture* texture)
     {
         super(vertices);
 
@@ -80,7 +80,7 @@ class TexturedMatrixPolygon : MatrixPolygon
     /**
      * Bind the VBAs and VBOs.
      */
-    public override void bind() const
+    public override void bind()
     {
         glUseProgram(this.program.id);
         glEnableVertexAttribArray(this.attrPosition);
@@ -96,7 +96,7 @@ class TexturedMatrixPolygon : MatrixPolygon
      *      camera  =       the camera
      *      datas   =       the data collection
      */
-    public override void render(Camera* camera, PolygonData[] datas) const
+    public override void render(Camera* camera, PolygonData[] datas)
     {
         glUseProgram(this.program.id);
 

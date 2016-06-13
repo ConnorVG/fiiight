@@ -192,4 +192,12 @@ struct Programs
 
         glUseProgram(program);
     }
+
+    /**
+     * Clears the programs.
+     */
+    void clear()
+    {
+        // Todo: everything
+    }
 }

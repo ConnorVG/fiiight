@@ -24,7 +24,7 @@ class Polygon
     /**
      * An array of the vertices.
      */
-    public const float[] vertices;
+    public float[] vertices;
 
     /**
      * The vertex array object id.
@@ -42,7 +42,7 @@ class Polygon
      * Params:
      *      vertices  =     the vertex array
      */
-    public this(const float[] vertices)
+    public this(float[] vertices)
     {
         this.vertices = vertices;
     }
@@ -75,7 +75,7 @@ class Polygon
     /**
      * Bind the VBAs and VBOs.
      */
-    public void bind() const
+    public void bind()
     {
         glBindVertexArray(this.vao);
     }
@@ -87,7 +87,7 @@ class Polygon
      *      camera  =       the camera
      *      datas   =       the data collection
      */
-    public void render(Camera* camera, PolygonData[] datas) const
+    public void render(Camera* camera, PolygonData[] datas)
     {
         // foreach (PolygonData* data; datas) {
         //     // ...
@@ -97,7 +97,7 @@ class Polygon
     /**
      * Unbinds the VBAs and VBOs.
      */
-    public void unbind() const
+    public void unbind()
     {
         glBindVertexArray(0);
     }

@@ -40,7 +40,7 @@ class MatrixPolygon : Polygon
      * Params:
      *      vertices  =     the vertex array
      */
-    public this(const float[] vertices)
+    public this(float[] vertices)
     {
         super(vertices);
     }
@@ -72,7 +72,7 @@ class MatrixPolygon : Polygon
     /**
      * Bind the VBAs and VBOs.
      */
-    public override void bind() const
+    public override void bind()
     {
         glUseProgram(this.program.id);
         glEnableVertexAttribArray(this.attrPosition);
@@ -87,7 +87,7 @@ class MatrixPolygon : Polygon
      *      camera  =       the camera
      *      datas   =       the data collection
      */
-    public override void render(Camera* camera, PolygonData[] datas) const
+    public override void render(Camera* camera, PolygonData[] datas)
     {
         glUseProgram(this.program.id);
 

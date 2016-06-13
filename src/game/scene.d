@@ -1,7 +1,7 @@
 module game.scene;
 
-import common : Programs;
-import engine : Textures, Polygons, RenderState = State, InputFactory;
+import game.state : StateCollections;
+import engine : RenderState = State;
 
 import std.parallelism : TaskPool;
 
@@ -11,23 +11,17 @@ interface IScene
      * Loads the scene.
      *
      * Params:
-     *      programs      =     the program collection
-     *      textures      =     the texture collection
-     *      polygons      =     the polygon collection
-     *      inputFactory  =     the input factory
+     *      collections  =      the state collections
      */
-    void load(Programs* programs, Textures* textures, Polygons* polygons, InputFactory* inputFactory);
+    void load(StateCollections* collections);
 
     /**
      * Unloads the scene.
      *
      * Params:
-     *      programs      =     the program collection
-     *      textures      =     the texture collection
-     *      polygons      =     the polygon collection
-     *      inputFactory  =     the input factory
+     *      collections  =      the state collections
      */
-    void unload(Programs* programs, Textures* textures, Polygons* polygons, InputFactory* inputFactory);
+    void unload(StateCollections* collections);
 
     /**
      * Update the scene.

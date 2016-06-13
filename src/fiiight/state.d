@@ -1,19 +1,18 @@
 module fiiight.state;
 
 import fiiight.scenes : MenuScene;
-import common : Programs, Program, DelegateCommand;
-import engine : InputFactory, InputHandler, RenderState = State, Textures, Polygons, Camera, Key;
-import game : IState, IScene;
+import common : Programs, DelegateCommand;
+import engine : InputFactory, RenderState = State, Textures, Polygons, Camera, Key, TextMatrixPolygonFonts, TextMatrixPolygon, TextPolygonData;
+import game : StateCollections, IState, IScene;
 
+import std.format : format;
+import std.algorithm : remove;
 import std.parallelism : TaskPool;
+
+import core.time : MonoTime, dur;
 
 class State : IState
 {
-    /**
-     * The input factory.
-     */
-    protected InputFactory* inputFactory;
-
     /**
      * The render state.
      */
@@ -25,19 +24,9 @@ class State : IState
     protected Camera* camera;
 
     /**
-     * The program collection.
+     * The state collections.
      */
-    protected Programs* programs;
-
-    /**
-     * The texture collection.
-     */
-    protected Textures* textures;
-
-    /**
-     * The polygon collection.
-     */
-    protected Polygons* polygons;
+    protected StateCollections* stateCollections;
 
     /**
      * The current scene.
@@ -45,50 +34,86 @@ class State : IState
     protected IScene scene;
 
     /**
+     * The fps polygon.
+     */
+    protected TextMatrixPolygon fpsPolygon;
+
+    /**
+     * The fps data.
+     */
+    protected TextPolygonData fpsData;
+
+    /**
+     * Debug shizzle.
+     */
+    protected TextPolygonData fpsChildData;
+
+    /**
+     * Recorded frame times.
+     */
+    protected ulong[] frames;
+
+    /**
      * Load the state.
      */
-    void load(InputFactory* inputFactory)
+    public void load(InputFactory* inputFactory)
     {
-        this.inputFactory = inputFactory;
-
         this.renderState = RenderState.create();
         this.camera = Camera.create();
 
-        this.programs = Programs.create();
+        this.stateCollections =  StateCollections.create(
+            Programs.create(),
+            Textures.create(),
+            Polygons.create(),
+            inputFactory
+        );
 
-        this.programs.load(
+        this.stateCollections.programs.load(
             "colour-matrix", "colour-matrix", "basic",
             [ "position" ],
             [ "colour", "model", "view" ]
         );
 
-        this.programs.load(
+        this.stateCollections.programs.load(
             "texture-matrix", "texture-matrix", "texture",
             [ "position", "texture" ],
             [ "colour", "model", "view" ]
         );
 
-        this.textures = Textures.create();
-        this.polygons = Polygons.create();
-
         this.scene = new MenuScene();
-        this.scene.load(this.programs, this.textures, this.polygons, this.inputFactory);
+        this.scene.load(this.stateCollections);
+
+        this.fpsPolygon = new TextMatrixPolygon(TextMatrixPolygonFonts.DEFAULT);
+        this.fpsPolygon.load(this.stateCollections.programs, this.stateCollections.textures);
+
+        this.fpsData = new TextPolygonData("0 fps");
+
+        this.fpsData.position.x = 0.015f;
+        this.fpsData.position.y = 0.01f;
+
+        this.fpsData.scale.x = 0.03f;
+        this.fpsData.scale.y = 0.03f;
+
+        this.fpsChildData = new TextPolygonData("this should be anchored around the fps counter! :-(");
+
+        this.fpsChildData.position.x = 0.15f;
+        this.fpsChildData.position.y = 0.01f;
+
+        this.fpsChildData.scale.x = 0.6f;
+        this.fpsChildData.scale.y = 0.6f;
+
+        this.fpsChildData.parent = this.fpsData;
     }
 
     /**
      * Unload the state.
      */
-    void unload()
+    public void unload()
     {
-        this.scene.unload(this.programs, this.textures, this.polygons, this.inputFactory);
+        this.scene.unload(this.stateCollections);
         this.scene = null;
 
-        //this.programs.clear();
-        this.polygons.clear();
-        this.textures.clear();
-
-        this.renderState.clear();
-        this.inputFactory.clear();
+        this.stateCollections.clear();
     }
 
     /**
@@ -107,6 +132,10 @@ class State : IState
         }
 
         this.scene.update(tick, taskPool);
+
+        this.fpsData.position.x += tick / 6000f;
+        this.fpsData.position.y += tick / 6000f;
+        this.fpsData.rotation += tick / 600f;
     }
 
     /**
@@ -114,11 +143,35 @@ class State : IState
      */
     public void render()
     {
+        ulong now = MonoTime.currTime.ticks;
+
+        this.frames ~= now;
+        this.frames = this.frames.remove!(time => time + MonoTime.ticksPerSecond < now);
+
+        this.fpsData.text = "%d fps".format(this.frames.length);
+
+        if (this.frames.length <= 30) {
+            this.fpsData.colour.r = 1.0f;
+            this.fpsData.colour.g = 0.3f;
+            this.fpsData.colour.b = 0.3f;
+        } else if (this.frames.length <= 50) {
+            this.fpsData.colour.r = 1.0f;
+            this.fpsData.colour.g = 1.0f;
+            this.fpsData.colour.b = 0.6f;
+        } else {
+            this.fpsData.colour.r = 0.6f;
+            this.fpsData.colour.g = 1.0f;
+            this.fpsData.colour.b = 0.6f;
+        }
+
         this.renderState.clear();
 
         if (this.scene) {
             this.scene.render(this.renderState);
         }
+
+        this.renderState.render(this.fpsPolygon, this.fpsData);
+        this.renderState.render(this.fpsPolygon, this.fpsChildData);
 
         this.renderState.render(this.camera);
     }

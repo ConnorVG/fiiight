@@ -38,7 +38,7 @@ struct Camera
      * Returns: a pointer to the camera instance
      */
     public static Camera* create(
-        vec2 position = vec2(0.5f, 0.5f),
+        vec2 position = vec2(0f, 0f),
         float rotation = 0f,
         float zoom = 1f
     ) {
@@ -86,7 +86,7 @@ struct Camera
     @property matrix()
     {
         return mat4.identity.rotatez(-this.rotation)
-                            .scale(-this.zoom, -this.zoom, -this.zoom)
-                            .translate((this.position.x - 0.5f) * -2.0f, (this.position.y - 0.5f) * 2.0f, 0.0f);
+                   .scale(this.zoom, this.zoom, this.zoom)
+                   .translate(-this.position.x * 2.0f - 1.0f, -this.position.y * 2.0f + 1.0f, 0.0f);
     }
 }

@@ -2,6 +2,7 @@ module game.ui.ui;
 
 import common : Programs;
 import engine : Textures, Polygons, RenderState = State;
+import game.scene : StateCollections;
 
 import std.parallelism : TaskPool;
 import std.stdio : writeln;
@@ -15,9 +16,6 @@ struct UI
     // can traverse with next/prev and preferably always
     // hold a pointer to it's parent just incase we're in
     // a nested / child NodeList/Tree...
-
-    // temp/debug input
-    protected string input = "";
 
     /**
      * We don't want the default construction to be possible.
@@ -38,11 +36,9 @@ struct UI
      * Loads the scene.
      *
      * Params:
-     *      programs  =     the program collection
-     *      textures  =     the texture collection
-     *      polygons  =     the polygon collection
+     *      stateCollections  =     the state collections
      */
-    public void load(Programs* programs, Textures* textures, Polygons* polygons)
+    public void load(StateCollections* stateCollections)
     {
         // we'll need to know everything the entire menu (including it's children) needs
     }
@@ -51,11 +47,9 @@ struct UI
      * Unloads the scene.
      *
      * Params:
-     *      programs  =     the program collection
-     *      textures  =     the texture collection
-     *      polygons  =     the polygon collection
+     *      stateCollections  =     the state collections
      */
-    public void unload(Programs* programs, Textures* textures, Polygons* polygons)
+    public void unload(StateCollections* stateCollections)
     {
         // see above func
     }
@@ -83,6 +77,11 @@ struct UI
         // ...
     }
 
+    //@property IComponent focused()
+    //{
+    //    return currently selected component
+    //}
+
     // generic movement
     public void next() { writeln("next menu item"); }
     public void previous() { writeln("previous menu item"); }
@@ -96,39 +95,12 @@ struct UI
     public void decrease() { writeln("decrease generic input bool / slider"); }
 
     // generic character
-    public void character(wchar character)
-    {
-        if (this.input.length >= ubyte.max || (character == ' ' && (this.input.length == 0 || this.input[this.input.length - 1] == ' '))) {
-            return;
-        }
-
-        this.input ~= character;
-
-        writeln("input: '", this.input, "'");
-    }
+    public void character(wchar character) { writeln("enter character: '", character, "'"); }
 
     // generic clear
-    public void clear()
-    {
-        this.input = "";
-
-        writeln("input: '", this.input, "'");
-    }
+    public void clear() { writeln("clear all"); }
 
     // generic partial clear
-    public void clear(ubyte count)()
-    {
-        if (this.input.length > 0) {
-            if (count > this.input.length) {
-                this.clear();
-
-                return;
-            }
-
-            this.input = this.input[0..(this.input.length - count)];
-        }
-
-        writeln("input: '", this.input, "'");
-    }
+    public void clear(ubyte count)() { writeln("clear x: '", count, "'"); }
 
 }

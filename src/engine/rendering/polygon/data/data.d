@@ -28,6 +28,13 @@ class PolygonData
     public vec4 colour;
 
     /**
+     * The parent.
+     */
+    public PolygonData parent;
+
+    protected mat4 _matrix;
+
+    /**
      * Creates an instance of data.
      *
      * Returns: the data instance
@@ -49,10 +56,16 @@ class PolygonData
      *
      * Returns: the matrix
      */
-    @property matrix()
+    @property mat4 matrix()
     {
-        return mat4.identity.scale(this.scale.x, this.scale.y, 1.0f)
-                            .rotatez(-this.rotation)
-                            .translate(this.position.x * -2.0f + 1.0f, this.position.y * 2.0f - 1.0f, 0.0f);
+        this._matrix = mat4.identity.scale(this.scale.x, this.scale.y, 1.0f)
+                                    .rotatez(-this.rotation)
+                                    .translate(this.position.x * 2.0f, -this.position.y * 2.0f, 0.0f);
+
+        if (this.parent !is null) {
+            this._matrix = this._matrix * this.parent.matrix;
+        }
+
+        return this._matrix;
     }
 }

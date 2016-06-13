@@ -5,7 +5,10 @@ import common : Settings;
 import engine : Engine;
 
 import derelict.glfw3.glfw3 : glfwPollEvents, glfwSwapBuffers;
-import derelict.opengl3.gl3 : glClear, GL_COLOR_BUFFER_BIT, GL_DEPTH_BUFFER_BIT;
+import derelict.opengl3.gl3 :
+    glClear, glEnable, glBlendFunc, glCullFace, glFrontFace,
+    GL_BLEND, GL_SRC_ALPHA, GL_CULL_FACE, GL_BACK, GL_CCW,
+    GL_COLOR_BUFFER_BIT, GL_DEPTH_BUFFER_BIT, GL_ONE_MINUS_SRC_ALPHA;
 
 import std.parallelism : TaskPool;
 
@@ -70,7 +73,7 @@ struct Game
         this.engine.open(
             "fiiight [common:0.0.1, engine:0.0.1, game:0.0.1]",
             1080,
-            810,
+            608,
             this.settings.fullscreen,
             this.settings.borderless
         );
@@ -94,14 +97,17 @@ struct Game
         int updateDelay = 0;
         int renderDelay = 0;
 
-        MonoTime before = MonoTime.currTime;
-
         auto window = this.engine.getGlfwWindow();
 
+        MonoTime updateBefore = MonoTime.currTime;
+        MonoTime renderBefore = MonoTime.currTime;
+        MonoTime now;
+        Duration elapsed;
+        long elapsedTotal;
         while (this.running && ! this.engine.isClosed()) {
-            MonoTime now = MonoTime.currTime;
-            Duration elapsed = now - before;
-            long elapsedTotal = elapsed.total!"msecs";
+            now = MonoTime.currTime;
+            elapsed = now - updateBefore;
+            elapsedTotal = elapsed.total!"msecs";
 
             TaskPool taskPool;
 
@@ -110,25 +116,39 @@ struct Game
                 glfwPollEvents();
 
                 float updateTick = updateRate / updateRateBase;
-                updateTick += updateTick * updateDelay / updateRate;
+
+                if (updateDelay > 0) {
+                    updateTick += (updateDelay / updateRate) / updateRateBase;
+                }
 
                 taskPool = new TaskPool();
                 state.update(updateTick, &taskPool);
 
                 updateDelay = cast(int) -updateRate;
+                updateBefore = now;
             }
 
             now = MonoTime.currTime;
-            elapsed = now - before;
+            elapsed = now - renderBefore;
             elapsedTotal = elapsed.total!"msecs";
 
             renderDelay += elapsedTotal;
             if (renderDelay >= -1) {
                 glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
+                glEnable(GL_BLEND);
+                glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+
+                //glEnable(GL_CULL_FACE);
+                //glCullFace(GL_BACK);
+                //glFrontFace(GL_CCW);
+
                 state.render();
+
                 glfwSwapBuffers(window);
 
                 renderDelay = cast(int) -renderRate;
+                renderBefore = now;
             }
 
             // Not sure if this should just be in the update block or not, honestly.
@@ -137,11 +157,9 @@ struct Game
             }
 
             int delay = updateDelay < renderDelay ? renderDelay : updateDelay;
-            if (elapsedTotal <= 1 || delay < -1) {
-                Thread.sleep(dur!"msecs"(delay * -1));
+            if (delay < -2) {
+                Thread.sleep(dur!"msecs"(delay * -1 - 1));
             }
-
-            before = now;
         }
 
         if (! this.engine.isClosed()) {
