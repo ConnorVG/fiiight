@@ -58,12 +58,14 @@ class PolygonData
      */
     @property mat4 matrix()
     {
-        this._matrix = mat4.identity.scale(this.scale.x, this.scale.y, 1.0f)
-                                    .rotatez(-this.rotation)
-                                    .translate(this.position.x * 2.0f, -this.position.y * 2.0f, 0.0f);
+        this._matrix = mat4.identity;
+
+        this._matrix = this._matrix.scale(this.scale.x, this.scale.y, 1.0f)
+                                   .rotatez(-this.rotation)
+                                   .translate(this.position.x * 2.0f, -this.position.y * 2.0f, 0.0f);
 
         if (this.parent !is null) {
-            this._matrix = this._matrix * this.parent.matrix;
+            this._matrix = this.parent.matrix * this._matrix;
         }
 
         return this._matrix;

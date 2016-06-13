@@ -96,7 +96,7 @@ class State : IState
 
         this.fpsChildData = new TextPolygonData("this should be anchored around the fps counter! :-(");
 
-        this.fpsChildData.position.x = 0.15f;
+        this.fpsChildData.position.x = 1f;
         this.fpsChildData.position.y = 0.01f;
 
         this.fpsChildData.scale.x = 0.6f;
@@ -136,6 +136,7 @@ class State : IState
         this.fpsData.position.x += tick / 6000f;
         this.fpsData.position.y += tick / 6000f;
         this.fpsData.rotation += tick / 600f;
+        this.fpsChildData.rotation = -this.fpsData.rotation;
     }
 
     /**
