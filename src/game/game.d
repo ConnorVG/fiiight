@@ -117,7 +117,7 @@ struct Game
             TaskPool taskPool;
 
             updateDelay += elapsedTotal;
-            if (updateDelay >= 0) {
+            if (updateDelay >= -1) {
                 glfwPollEvents();
 
                 float updateTick = updateRate / updateRateBase;
@@ -138,7 +138,7 @@ struct Game
             renderBefore = now;
 
             renderDelay += elapsedTotal;
-            if (renderDelay >= 0) {
+            if (renderDelay >= -1) {
                 glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
                 glEnable(GL_BLEND);
@@ -161,7 +161,7 @@ struct Game
             }
 
             int delay = updateDelay < renderDelay ? renderDelay : updateDelay;
-            if (delay < 0) {
+            if (delay < -1) {
                 Thread.sleep(dur!"usecs"(delay * -1));
             }
         }

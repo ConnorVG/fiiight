@@ -4,6 +4,150 @@
 		"selected_items":
 		[
 			[
+				"line",
+				"lineHeight"
+			],
+			[
+				"char",
+				"character"
+			],
+			[
+				"render",
+				"renderRate"
+			],
+			[
+				"rend",
+				"renderRate"
+			],
+			[
+				"update",
+				"updateInput"
+			],
+			[
+				"STate",
+				"StateCollections"
+			],
+			[
+				"text",
+				"TextPolygonData"
+			],
+			[
+				"Pol",
+				"TextMatrixPolygon"
+			],
+			[
+				"Text",
+				"TextMatrixPolygonFonts"
+			],
+			[
+				"tick",
+				"tickFlip"
+			],
+			[
+				"matr",
+				"_matrix"
+			],
+			[
+				"vec",
+				"vec3"
+			],
+			[
+				"roat",
+				"rotation"
+			],
+			[
+				"updatera",
+				"updateRateBase"
+			],
+			[
+				"upda",
+				"updateDelay"
+			],
+			[
+				"last",
+				"lastFrame"
+			],
+			[
+				"el",
+				"elapsed"
+			],
+			[
+				"Last",
+				"lastFrame"
+			],
+			[
+				"curr",
+				"currTime"
+			],
+			[
+				"fps",
+				"fpsData"
+			],
+			[
+				"TExt",
+				"TextPolygonData"
+			],
+			[
+				"fp",
+				"fpsData"
+			],
+			[
+				"TE",
+				"TextPolygonMatrix"
+			],
+			[
+				"chr",
+				"character"
+			],
+			[
+				"tex",
+				"textureCoordinates"
+			],
+			[
+				"ne",
+				"newVertices"
+			],
+			[
+				"Poly",
+				"PolygonData"
+			],
+			[
+				"frag",
+				"fragColour"
+			],
+			[
+				"GL_ON",
+				"GL_ONE_MINUS_SRC_ALPHA"
+			],
+			[
+				"Bitm",
+				"BitmapFontCharacter"
+			],
+			[
+				"scale",
+				"scaleW"
+			],
+			[
+				"BitM",
+				"BitmapFont"
+			],
+			[
+				"Bit",
+				"BitmapFontCharacter"
+			],
+			[
+				"state",
+				"stateCollections"
+			],
+			[
+				"stateCo",
+				"StateCollections"
+			],
+			[
+				"State",
+				"StateCollections"
+			],
+			[
 				"input",
 				"inputHandler"
 			],
@@ -22,10 +166,6 @@
 			[
 				"Polygon",
 				"PolygonData"
-			],
-			[
-				"frag",
-				"fragmentShaderContent"
 			],
 			[
 				"inputR",
@@ -215,6 +355,14 @@
 	},
 	"buffers":
 	[
+		{
+			"file": "src/game/game.d",
+			"settings":
+			{
+				"buffer_size": 4425,
+				"line_ending": "Unix"
+			}
+		}
 	],
 	"build_system": "",
 	"build_system_choices":
@@ -223,10 +371,26 @@
 	"build_varint": "",
 	"command_palette":
 	{
-		"height": 75.0,
-		"last_filter": "addfo",
+		"height": 110.0,
+		"last_filter": "upper",
 		"selected_items":
 		[
+			[
+				"upper",
+				"Convert Case: Upper Case"
+			],
+			[
+				"lowe",
+				"Convert Case: Lower Case"
+			],
+			[
+				"case",
+				"Convert Case: Upper Case"
+			],
+			[
+				"wordwr",
+				"Word Wrap: Toggle"
+			],
 			[
 				"addfo",
 				"Project: Add Folder"
@@ -353,39 +517,50 @@
 	},
 	"expanded_folders":
 	[
-		"/home/connor/Projects/D-Lang/fiiight/src/common",
-		"/home/connor/Projects/D-Lang/fiiight/src/common/commands",
 		"/home/connor/Projects/D-Lang/fiiight/src/engine",
-		"/home/connor/Projects/D-Lang/fiiight/src/engine/input",
 		"/home/connor/Projects/D-Lang/fiiight/src/engine/rendering",
 		"/home/connor/Projects/D-Lang/fiiight/src/engine/rendering/polygon",
 		"/home/connor/Projects/D-Lang/fiiight/src/engine/rendering/polygon/data",
 		"/home/connor/Projects/D-Lang/fiiight/src/game",
 		"/home/connor/Projects/D-Lang/fiiight/src/game/ui",
 		"/home/connor/Projects/D-Lang/fiiight/src/fiiight",
-		"/home/connor/Projects/D-Lang/fiiight/src/fiiight/scenes"
+		"/home/connor/Projects/D-Lang/fiiight/src/fiiight/scenes",
+		"/home/connor/Projects/D-Lang/fiiight/resources",
+		"/home/connor/Projects/D-Lang/fiiight/resources/shaders",
+		"/home/connor/Projects/D-Lang/fiiight/resources/shaders/vertex"
 	],
 	"file_history":
 	[
-		"/home/connor/Projects/D-Lang/fiiight/src/game/ui/ui.d",
-		"/home/connor/Projects/D-Lang/fiiight/src/game/game.d",
+		"/home/connor/Projects/D-Lang/fiiight/src/engine/rendering/polygon/text_matrix_polygon.d",
 		"/home/connor/Projects/D-Lang/fiiight/src/fiiight/state.d",
-		"/home/connor/Projects/D-Lang/fiiight/src/fiiight/scenes/menu.d",
-		"/home/connor/Projects/D-Lang/fiiight/src/engine/rendering/camera.d",
-		"/home/connor/Projects/D-Lang/fiiight/src/game/scene.d",
-		"/home/connor/Projects/D-Lang/fiiight/src/common/commands/command.d",
-		"/home/connor/Projects/D-Lang/fiiight/src/engine/input/handling.d",
-		"/home/connor/Projects/D-Lang/fiiight/src/engine/input/package.d",
+		"/home/connor/Projects/D-Lang/fiiight/resources/fonts/source-code-pro-light.fnt",
+		"/home/connor/Projects/D-Lang/fiiight/src/engine/rendering/font.d",
+		"/home/connor/Projects/D-Lang/fiiight/src/game/game.d",
 		"/home/connor/Projects/D-Lang/fiiight/src/engine/rendering/polygon/data/data.d",
+		"/home/connor/Projects/D-Lang/fiiight/src/engine/rendering/polygon/data/text_data.d",
+		"/home/connor/Projects/D-Lang/fiiight/src/game/ui/ui.d",
+		"/home/connor/Projects/D-Lang/fiiight/src/fiiight/scenes/menu.d",
+		"/home/connor/Projects/D-Lang/fiiight/resources/shaders/vertex/texture-matrix.glsl",
+		"/home/connor/Projects/D-Lang/fiiight/src/engine/rendering/polygon/polygon.d",
+		"/home/connor/Projects/D-Lang/fiiight/src/game/state.d",
+		"/home/connor/Projects/D-Lang/fiiight/resources/fonts/test.fnt",
+		"/home/connor/Projects/D-Lang/fiiight/src/engine/rendering/camera.d",
+		"/home/connor/Projects/D-Lang/fiiight/resources/shaders/fragment/texture.glsl",
+		"/home/connor/Projects/D-Lang/fiiight/src/engine/rendering/state.d",
 		"/home/connor/Projects/D-Lang/fiiight/src/engine/rendering/polygon/matrix_polygon.d",
 		"/home/connor/Projects/D-Lang/fiiight/src/engine/rendering/polygon/textured_matrix_polygon.d",
+		"/home/connor/Projects/D-Lang/fiiight/src/engine/rendering/texture.d",
+		"/home/connor/Projects/D-Lang/fiiight/resources/shaders/fragment/basic.glsl",
+		"/home/connor/Projects/D-Lang/fiiight/src/common/utils/files.d",
+		"/home/connor/Projects/D-Lang/fiiight/src/engine/rendering/polygon/data/package.d",
+		"/home/connor/Projects/D-Lang/fiiight/src/engine/input/handling.d",
+		"/home/connor/Projects/D-Lang/fiiight/src/common/utils/gl/programs.d",
+		"/home/connor/Projects/D-Lang/fiiight/src/game/scene.d",
+		"/home/connor/Projects/D-Lang/fiiight/src/common/commands/command.d",
+		"/home/connor/Projects/D-Lang/fiiight/src/engine/input/package.d",
 		"/home/connor/Projects/D-Lang/fiiight/src/game/ui/tree.d",
 		"/home/connor/Projects/D-Lang/fiiight/src/game/ui/package.d",
-		"/home/connor/Projects/D-Lang/fiiight/src/engine/rendering/polygon/text_matrix_polygon.d",
-		"/home/connor/Projects/D-Lang/fiiight/src/engine/rendering/polygon/polygon.d",
-		"/home/connor/Projects/D-Lang/fiiight/src/engine/rendering/polygon/data/text_data.d",
 		"/home/connor/Projects/D-Lang/fiiight/resources/shaders/vertex/colour-matrix.glsl",
-		"/home/connor/Projects/D-Lang/fiiight/resources/shaders/vertex/texture-matrix.glsl",
 		"/home/connor/Projects/D-Lang/fiiight/.dub/old_src/utils/gl.d",
 		"/home/connor/Projects/D-Lang/fiiight/.dub/resources/shaders/vertex/2d-basic-position-colour.glsl",
 		"/home/connor/Projects/D-Lang/fiiight/.dub/resources/shaders/fragment/basic-colour.glsl",
@@ -483,18 +658,7 @@
 		"/home/connor/Projects/D-Lang/Getting Started/.editorconfig",
 		"/home/connor/Projects/Content Management System/.editorconfig",
 		"/home/connor/Projects/Electron/Cage/src/rats/engine/src/interaction/Engine.js",
-		"/home/connor/Projects/Electron/Cage/src/rats/engine/src/utils/Mouse.js",
-		"/home/connor/Projects/Electron/Cage/src/rats/engine/index.html",
-		"/home/connor/Projects/Electron/Cage/src/rats/engine/src/rendering/renderable/2d/Polygon.js",
-		"/home/connor/Projects/Electron/Cage/src/rats/engine/src/interaction/Source.js",
-		"/home/connor/Projects/Electron/Cage/src/rats/engine/src/utils/Timer.js",
-		"/home/connor/Projects/Electron/Cage/src/rats/engine/src/utils/Matrix.js",
-		"/home/connor/Projects/Electron/Cage/src/rats/engine/src/rendering/renderable/2d/Container.js",
-		"/home/connor/Projects/Electron/Cage/src/rats/engine/src/rendering/Target.js",
-		"/home/connor/Projects/Electron/Cage/src/rats/engine/src/rendering/Engine.js",
-		"/home/connor/Projects/Electron/Cage/src/rats/engine/src/rendering/renderable/Object.js",
-		"/home/connor/Projects/Electron/Cage/src/rats/engine/src/rendering/renderable/Container.js",
-		"/home/connor/Projects/Electron/Cage/src/rats/engine/impl/Game.js"
+		"/home/connor/Projects/Electron/Cage/src/rats/engine/src/utils/Mouse.js"
 	],
 	"find":
 	{
@@ -520,134 +684,134 @@
 		"case_sensitive": true,
 		"find_history":
 		[
-			"zoom",
-			"writeln",
-			"/**",
-			"previous",
-			"UP",
-			"scene",
-			"GenericCommand",
-			"bind",
-			"increase",
-			"(this.selected) % cast(int) this.data.length",
-			"this.data.length",
-			"+",
-			"cast(int) (",
-			"key",
-			"action",
-			"     the ",
-			"     ",
-			"InputHandler",
-			"2f",
-			"right",
-			"rotateCamera",
-			"run",
-			"the",
-			": ",
-			"rotation",
-			"15f",
-			"1.0",
-			"-1",
-			" 1.0f",
-			"1.0f",
-			"0.0f",
-			"source",
-			"engine",
-			"component1",
-			"addGfxCmdText",
-			", 1.0f, 1.0f,",
-			"1.0f, 1.0f,",
-			"0.1",
 			"*",
-			"0.9",
-			"0.1",
-			"1.0f,\n    ",
-			" 1.0f,",
-			"vertex",
-			"this.vbo",
-			"position",
-			"1.0f",
-			"0.0f",
-			"GL_LINES",
-			"GL_TRIANGLES",
-			"fragColour",
-			"position",
-			"void",
-			"-",
-			"name",
-			"mat",
-			"\"",
-			"\\n\"",
-			"\\n",
-			"\"",
-			"(\"",
-			"\\n\"",
-			"                 \"",
-			"               \"",
-			"Handler",
-			"InputHandler",
-			"...",
-			"mods",
-			"GL_COLOR_BUFFER_BIT",
-			"Vulkan",
-			"instance",
-			"../../../",
-			"./lib/",
-			"'",
-			"\",",
-			"'",
-			"position",
-			"GLenum",
-			"GLint",
-			"GLuint",
-			"Camera",
-			"vbo",
-			"posAttrib",
-			"outColor",
-			"vbo",
-			"\"\n            ",
-			"\"",
-			"void",
-			"uint",
-			"windowWidth",
-			"width",
+			"psDatas",
+			"psDatasss",
+			"fpsData",
+			"renderRate",
+			" 0.015f",
+			"0.015f",
+			".x = 0.03f",
+			"0.03f",
+			"msecs",
+			"fpsPolygon",
+			"frame",
+			"frames",
+			"fps",
+			"fpsChildData",
+			"15",
+			"scale",
+			"text",
+			"tic",
 			"x",
-			"this.",
-			"float",
-			"private",
-			"The",
-			"width",
-			"float",
-			"InputHandler",
-			"handlers",
-			"register",
-			"InputHandler",
-			"input handler",
-			"inputHandler",
+			"this.position",
+			"scale",
+			"mat4",
+			"75",
+			"fpsData",
+			"   .",
+			"   ",
+			"2",
+			"3f",
+			"3",
+			"alogrithm",
+			"ubyte",
+			"this.frames.length",
+			"SList",
+			"position",
+			"1",
+			"TextPolygonMatrix",
+			"0.5f",
+			"[0]",
+			"0",
+			"cursor",
+			"64",
+			"0.0f + ",
+			"0.0f + def.",
+			"0.0f + ",
+			"0.0f",
+			"index",
+			"this.scale * ",
+			"(1.0f * index)",
+			"xPos + def.xOffset",
+			" * def.height",
+			"), 1.0f,",
+			"1.0f",
+			"xAdvance",
+			"xOffset",
+			"index",
+			"* (index + 1)",
+			" * (index + 1)",
+			"textureCoordinates",
+			"GL_CW",
+			"1",
+			"3",
+			"7",
+			"3",
+			"1",
+			"0",
+			"colour",
+			"1.0f - ",
+			"1024",
+			"def.y",
+			"(def.y + def.height)",
+			"+",
+			"x",
 			"-",
-			"2d",
-			"void",
-			" }",
-			"== ",
-			" is null",
-			"is",
-			"Scene*",
-			"type == InputType.KEY && ",
-			"clear",
-			"GLFWwindow",
-			" Command",
-			"types",
-			" &&",
-			"GLFW_KEY_ESC",
-			"InputKeyCommand",
-			"bool",
-			"typeCommand",
-			"bool",
+			"[1]",
+			"-1.0",
+			") const",
+			"-1.0f",
+			"auto",
+			"PolygonData",
+			"textureCoordinates",
+			"1.0f",
+			"GL_CLAMP_TO_EDGE",
+			"1200f",
+			"600f",
+			"position",
+			"GL_STREAM_DRAW",
+			"Enable",
+			"GL_CW",
+			"()",
+			"GL_DYNAMIC_DRAW",
+			"0]",
+			"0",
+			"GL_STATIC_DRAW",
+			"const",
+			"wchar",
+			"character",
+			"float",
+			"base",
+			"this",
+			"public const ",
+			"cast(ushort)",
+			"'1'",
+			" =",
+			"size",
+			"bold",
+			"size",
+			"face",
+			"program",
+			"Program",
+			"bitmapFontCharacter",
+			"bitmapFont.",
+			"font",
+			"this.font",
+			",\n        c",
+			",\n",
+			"public",
+			";",
+			"BitmapFontCharacter",
+			"float",
+			"state",
+			"State",
+			"ushort",
 			"uint",
-			"action",
-			"continue",
-			"action",
-			"key"
+			"stateCollections",
+			"data",
+			"Programs* programs, Textures* textures, Polygons* polygons",
+			"stateCollections"
 		],
 		"highlight": true,
 		"in_selection": false,
@@ -680,8 +844,42 @@
 	"groups":
 	[
 		{
+			"selected": 0,
 			"sheets":
 			[
+				{
+					"buffer": 0,
+					"file": "src/game/game.d",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 4425,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								4174,
+								4174
+							]
+						],
+						"settings":
+						{
+							"editorconfig": true,
+							"ensure_newline_at_eof_on_save": true,
+							"syntax": "Packages/D/D.sublime-syntax",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true,
+							"trim_trailing_white_space_on_save": true
+						},
+						"translation.x": -0.0,
+						"translation.y": 4060.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 0,
+					"type": "text"
+				}
 			]
 		}
 	],
@@ -742,8 +940,76 @@
 		"selected_items":
 		[
 			[
+				"textpo",
+				"engine/rendering/polygon/text_matrix_polygon.d"
+			],
+			[
+				".fnt",
+				"resources/fonts/source-code-pro-light.fnt"
+			],
+			[
+				"font.d",
+				"engine/rendering/font.d"
+			],
+			[
+				"polyte",
+				"engine/rendering/polygon/text_matrix_polygon.d"
+			],
+			[
+				"polygondata",
+				"engine/rendering/polygon/data/data.d"
+			],
+			[
+				"textdata",
+				"engine/rendering/polygon/data/text_data.d"
+			],
+			[
+				"textpol",
+				"engine/rendering/polygon/text_matrix_polygon.d"
+			],
+			[
+				"polygon",
+				"engine/rendering/polygon/polygon.d"
+			],
+			[
 				"camera",
 				"engine/rendering/camera.d"
+			],
+			[
+				"cae",
+				"engine/rendering/camera.d"
+			],
+			[
+				"data",
+				"engine/rendering/polygon/data/data.d"
+			],
+			[
+				"camera.",
+				"engine/rendering/camera.d"
+			],
+			[
+				"texture",
+				"engine/rendering/texture.d"
+			],
+			[
+				"ui.d",
+				"game/ui/ui.d"
+			],
+			[
+				"emnu.d",
+				"fiiight/scenes/menu.d"
+			],
+			[
+				"fii/state",
+				"fiiight/state.d"
+			],
+			[
+				"progra",
+				"common/utils/gl/programs.d"
+			],
+			[
+				"state",
+				"game/state.d"
 			],
 			[
 				"input/han",
@@ -1006,7 +1272,7 @@
 	"show_open_files": false,
 	"show_tabs": true,
 	"side_bar_visible": true,
-	"side_bar_width": 198.0,
+	"side_bar_width": 248.0,
 	"status_bar_visible": true,
 	"template_settings":
 	{
